@@ -5,15 +5,10 @@ import { connect } from 'react-redux'
 import { facebookLogin, demoLogin, logout } from './loginActions'
 
 class Login extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.error) {
-      nextProps.onError(nextProps.error);
-    }
-  }
   render() {
-    const { props: { data, handleFacebookLogin, handleDemoLogin } } = this
+    const { props: { user, handleFacebookLogin, handleDemoLogin } } = this
 
-    if(!data) {
+    if(!user) {
       return (
         <View style={styles.container}>
           <View style={styles.instructions}>
@@ -73,7 +68,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    data: state.login.get('data'),
+    user: state.login.get('data'),
     loading: state.login.get('loading'),
     error: state.login.get('error'),
   }

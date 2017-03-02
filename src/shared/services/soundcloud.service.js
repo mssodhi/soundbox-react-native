@@ -12,6 +12,6 @@ export const constructUserUrl = (userId) => {
 	return `http://api.soundcloud.com/users/${userId}?client_id=${CLIENT_ID}`;
 }
 
-export const constructPlayerUrl = (trackId) => {
+export const constructStreamUrl = (trackId) => {
 	return `http://api.soundcloud.com/tracks/${trackId}/stream?client_id=${CLIENT_ID}`;
 }
