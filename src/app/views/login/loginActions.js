@@ -13,7 +13,7 @@ export const logout = () => {
 export const facebookLogin = () => {
   console.log('in action fb');
   return dispatch => {
-    // dispatch({ type: AUTH_FACEBOOK });
+    dispatch({ type: AUTH_FACEBOOK });
     dispatch(resolve({
       details: {
         username: 'facebook user',
@@ -34,13 +34,6 @@ export const demoLogin = () => {
         fbId: '1209'
       }
     }));
-    // dispatch(resolve({
-    //   details: {
-    //     username: 'demo',
-    //     name: 'Demo Smith',
-    //     userId: '1209'
-    //   }
-    // }));
     // axios({
     //   url: 'https://api.backand.com/token',
     //   method: 'POST',

@@ -4,6 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
 import { logout } from '../login/loginActions'
+import { loadFavorites } from '../../../shared/components/favorites/favoritesActions'
 
 class Home extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -12,7 +13,7 @@ class Home extends React.Component {
     }
   }
   render() {
-    const { props: { data, loading, handleLogout } } = this
+    const { props: { data, loading, handleLogout, handleLoadFavorites } } = this
     
     if(data && !loading) {
       return (
@@ -20,6 +21,7 @@ class Home extends React.Component {
           <View style={styles.instructions}>
             <Text style={styles.welcome}>{`${data.get('details').get('name')}, Welcome to React Native!`}</Text>
             <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
+            <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLoadFavorites}>Load favorites</Icon.Button>
           </View>
         </View>
       )
@@ -66,6 +68,11 @@ const mapDispatchToProps = dispatch => {
   return {
     handleLogout: () => {
       dispatch(logout());
+    },
+    handleLoadFavorites: () => {
+      console.log('1209');
+
+      dispatch(loadFavorites('1209'));
     },
     onError: (text) => {
     	console.log('error');
