@@ -1,25 +1,19 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, StatusBar } from 'react-native';
+import { StyleSheet, Text, View, StatusBar, TabBarIOS } from 'react-native';
 import { connect } from 'react-redux'
 
-import Home from './views/home/Home'
+import TabsComponent from '../shared/components/tabs/TabsComponent'
 import Login from './views/login/Login'
 
 
-class App extends Component {
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.error) {
-      nextProps.onError(nextProps.error);
-    }
-  }
+class App extends Component { 
+  
   render() {
     const { props: { data } } = this
     if(data) {
       return (
-        <View style={styles.container}>
-          <Home />
-        </View>
+        <TabsComponent />
       );  
     } else {
       return (

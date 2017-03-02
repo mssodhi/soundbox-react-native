@@ -32,6 +32,10 @@ class TrackList extends React.Component {
   }
 }
 
+TrackList.PropTypes = {
+  track: PropTypes.object.isRequired
+}
+
 
 const styles = StyleSheet.create({
   container: {

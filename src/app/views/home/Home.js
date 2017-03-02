@@ -14,13 +14,9 @@ class Home extends React.Component {
     if(user && !loading && favState.get('tracks')) {      
       return (
         <View style={styles.container}>
-          <View style={styles.instructions}>
-            <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
-            <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
-          </View>
-          
+          <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
+          <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
           <TrackList tracks={favState.get('tracks')} />
-          
         </View>
       )
     } else {
@@ -32,7 +28,6 @@ class Home extends React.Component {
         </View>
       )
     }
-
   } /* end render */
 }
 
@@ -41,9 +36,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection:'column',
     backgroundColor: '#F5FCFF',
-  },
-  instructions: {
-    flex: .3,
     alignItems: 'center',
     justifyContent: 'center',
   },
