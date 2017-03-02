@@ -1,4 +1,5 @@
 import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './loginTypes';
+import { loadFavorites } from '../../../shared/components/favorites/favoritesActions'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -34,36 +35,7 @@ export const demoLogin = () => {
         fbId: '1209'
       }
     }));
-    // axios({
-    //   url: 'https://api.backand.com/token',
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/x-www-form-urlencoded'
-    //   },
-    //   data: qs.stringify({
-    //     grant_type: 'password',
-    //     appname: 'reactnativetodoexample',
-    //     username,
-    //     password
-    //   })
-    // })
-    //   .then(response => {
-    //     // console.log(response.data);
-    //     dispatch(resolve({
-    //       token: {
-    //         Authorization: `${response.data.token_type} ${response.data.access_token}`
-    //       },
-    //       details: {
-    //         username: response.data.username,
-    //         name: response.data.fullName,
-    //         userId: response.data.userId
-    //       }
-    //     }));
-    //   })
-    //   .catch(error => {
-    //     // console.log(error);
-    //     dispatch(reject(error.response.data.error_description));
-    //   });
+    dispatch(loadFavorites('1209'));
   };
 }
 

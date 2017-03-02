@@ -4,25 +4,23 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
 import { logout } from '../login/loginActions'
-import { loadFavorites } from '../../../shared/components/favorites/favoritesActions'
+import FavoritesList from '../../../shared/components/favorites/FavoritesList'
+import TrackList from '../../../shared/components/track-list/TrackList'
 
 class Home extends React.Component {
-  componentWillReceiveProps(nextProps) {
-    if(nextProps.error) {
-      nextProps.onError(nextProps.error);
-    }
-  }
   render() {
-    const { props: { data, loading, handleLogout, handleLoadFavorites } } = this
-    
-    if(data && !loading) {
+    const { props: { user, loading, favState, artists, tracks, handleLogout } } = this
+
+    if(user && !loading && favState.get('tracks')) {      
       return (
         <View style={styles.container}>
           <View style={styles.instructions}>
-            <Text style={styles.welcome}>{`${data.get('details').get('name')}, Welcome to React Native!`}</Text>
+            <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
             <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
-            <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLoadFavorites}>Load favorites</Icon.Button>
           </View>
+          
+          <TrackList tracks={favState.get('tracks')} />
+          
         </View>
       )
     } else {
@@ -58,8 +56,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    data: state.login.get('data'),
-    loading: state.login.get('loading'),
+    user: state.login.get('data'),
+    favState: state.favorites,
+    artists: state.favorites.artists,
+    tracks: state.favorites.get('tracks'),
+    loading: state.favorites.get('loading'),
     error: state.login.get('error'),
   }
 }
@@ -68,11 +69,6 @@ const mapDispatchToProps = dispatch => {
   return {
     handleLogout: () => {
       dispatch(logout());
-    },
-    handleLoadFavorites: () => {
-      console.log('1209');
-
-      dispatch(loadFavorites('1209'));
     },
     onError: (text) => {
     	console.log('error');

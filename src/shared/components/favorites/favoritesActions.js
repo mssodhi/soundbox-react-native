@@ -1,28 +1,37 @@
-import { LOAD_FAVORITES, LOAD_FAVORITES_COMPLETED } from './favoritesTypes';
-import { constructUserSongsUrl, constructSongUrl } from '../../services/soundcloud.service';
+import { LOAD_FAVORITES, LOAD_FAVORITES_ARTISTS_COMPLETED, LOAD_FAVORITES_TRACKS_COMPLETED } from './favoritesTypes';
+import { constructUserUrl, constructUserSongsUrl, constructSongUrl } from '../../services/soundcloud.service';
 
 export const loadFavorites = (fbId) => {
-  console.log(fbId);
   return dispatch => {
     dispatch({ type: LOAD_FAVORITES });
     fetch(`http://mssodhi.me/soundbox/api/favorites/getFavorites/user/${fbId}`)
       .then((response) => response.json())
-      .then((responseJson) => {
-
-        console.log(responseJson);
+      .then((favoriteArtists) => {
         let tracks = [];
-        responseJson.forEach(obj => {
-          fetch(constructUserSongsUrl(obj.artist_id))
+        let artists = [];
+        for(var a = 0; a < favoriteArtists.length; a++) {
+          var artist = favoriteArtists[a];
+
+          fetch(constructUserSongsUrl(artist.artist_id))
             .then((response) => response.json())
-            .then((res) => {
-              console.log(res);
-              tracks.push(res);
+            .then((response) => {
+              for(var i = 0; i < response.length; i++) {
+                tracks.push(response[i]);
+              }
+              dispatch(resolveTracks(tracks));
             })
             .catch((error) => {
               console.error(error);
             });
-        })
-        dispatch(resolve(tracks));
+
+          fetch(constructUserUrl(artist.artist_id))
+            .then((response) => response.json())
+            .then((res) => artists.push(res))
+            .then(() => dispatch(resolveArtists(artists)) )
+            .catch((error) => {
+              console.error(error);
+            });
+        }
       })
       .catch((error) => {
         console.error(error);
@@ -30,12 +39,17 @@ export const loadFavorites = (fbId) => {
   }
 }
 
-const resolve = (data) => {
+const resolveTracks = (tracks) => {
   return {
-    type: LOAD_FAVORITES_COMPLETED,
-    payload: {
-      data
-    }
+    type: LOAD_FAVORITES_TRACKS_COMPLETED,
+    payload: tracks
+  }
+}
+
+const resolveArtists = (artists) => {
+  return {
+    type: LOAD_FAVORITES_ARTISTS_COMPLETED,
+    payload: artists
   }
 }
 

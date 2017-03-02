@@ -7,3 +7,7 @@ export const constructSongUrl = (songId) => {
 export const constructUserSongsUrl = (userId) => {
 	return `http://api.soundcloud.com/users/${userId}/tracks?client_id=${CLIENT_ID}`;
 }
+
+export const constructUserUrl = (userId) => {
+	return `http://api.soundcloud.com/users/${userId}?client_id=${CLIENT_ID}`;
+}
