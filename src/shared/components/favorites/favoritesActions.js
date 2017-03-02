@@ -52,12 +52,3 @@ const resolveArtists = (artists) => {
     payload: artists
   }
 }
-
-const reject = (error) => {
-  return {
-    type: AUTH_REJECT,
-    payload: {
-      error
-    }
-  }
-}

@@ -3,18 +3,18 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, TabBarIOS } from 'react-native';
 import { connect } from 'react-redux'
 
+import * as CONFIG from './config';
 import TabsComponent from '../shared/components/tabs/TabsComponent'
 import Login from './views/login/Login'
 
+class App extends Component {
 
-class App extends Component { 
-  
   render() {
     const { props: { data } } = this
-    if(data) {
+    if (data) {
       return (
-        <TabsComponent />
-      );  
+        <TabsComponent style={styles.root} />
+      );
     } else {
       return (
         <View style={styles.container}>
@@ -31,6 +31,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
+  },
+  root: {
+    height: CONFIG.SCREEN.HEIGHT,
+    width: CONFIG.SCREEN.WIDTH,
+    backgroundColor: '#F5FCFF',
   }
 });
 
@@ -40,4 +45,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps) (App)
+export default connect(mapStateToProps)(App)

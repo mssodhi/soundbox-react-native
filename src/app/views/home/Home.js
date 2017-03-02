@@ -4,38 +4,46 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
 import { logout } from '../login/loginActions'
+import TrackList from '../../../shared/components/track/TrackList'
 import FavoritesList from '../../../shared/components/favorites/FavoritesList'
-import TrackList from '../../../shared/components/track-list/TrackList'
 
 class Home extends React.Component {
   render() {
-    const { props: { user, loading, favState, artists, tracks, handleLogout } } = this
-
-    if(user && !loading && favState.get('tracks')) {      
+    const { props: { user, favState, handleLogout } } = this
+    if (user && !favState.loadingArtists && !favState.loadingArtists) {
       return (
-        <View style={styles.container}>
-          <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
-          <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
-          <TrackList tracks={favState.get('tracks')} />
+        <View style={styles.home}>
+          <View style={styles.container}>
+            <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
+            <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
+          </View>
+          {favState.tracks.length > 0 && 
+            <TrackList tracks={favState.tracks} />
+          }
+          {/*{favState.artists.length > 0 &&
+            <FavoritesList artists={favState.artists} />
+          }*/}
         </View>
       )
     } else {
       return (
         <View style={styles.container}>
           <View style={styles.instructions}>
-            <Text style={styles.welcome}>Loading...</Text>  
+            <Text style={styles.welcome}>Loading...</Text>
           </View>
         </View>
       )
     }
-  } /* end render */
+  }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  home: {
     flex: 1,
-    flexDirection:'column',
+    flexDirection: 'column',
     backgroundColor: '#F5FCFF',
+  },
+  container: {
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -50,9 +58,6 @@ const mapStateToProps = state => {
   return {
     user: state.login.get('data'),
     favState: state.favorites,
-    artists: state.favorites.artists,
-    tracks: state.favorites.get('tracks'),
-    loading: state.favorites.get('loading'),
     error: state.login.get('error'),
   }
 }
@@ -63,7 +68,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(logout());
     },
     onError: (text) => {
-    	console.log('error');
+      console.log('error');
       // dispatch(openModal(text))
     }
   }

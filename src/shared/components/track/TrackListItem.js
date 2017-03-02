@@ -1,45 +1,37 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View, Text, Image, ListView } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 
-/*class TrackListItem extends React.Component {
+import { loadTrack } from '../music-player/musicPlayerActions'
+
+class TrackListItem extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      track: props.track
-    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       nextProps.onError(nextProps.error);
     }
-
-    this.setState({
-      track: nextProps.track
-    })
   }
   render() {
+    const { props: { handleSelectTrack } } = this
+    let imageUrl = this.props.track.artwork_url ? this.props.track.artwork_url : ''
     return (
-      <View style={styles.container}>
-        <Image source={{ uri: props.picture.large }} style={styles.photo} />
-        <Text style={styles.text}>
-          {`${props.name.first} ${props.name.last}`}
-        </Text>
-      </View>
+      <TouchableHighlight onPress={()=> handleSelectTrack(this.props.track)}>
+        <View style={styles.container}>
+          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} alt="img" style={styles.photo} />
+          <Text style={styles.text}>
+            {`${this.props.track.title} - ${this.props.track.user.username}`}
+          </Text>
+        </View>
+      </TouchableHighlight>
     )
   }
-}*/
+}
 
-export const TrackListItem = (props) => (
-  <View style={styles.container}>
-    <Image source={{ uri: props.track.artwork_url}} style={styles.photo} />
-    <Text style={styles.text}>
-      {`${props.track.title} - ${props.track.user.username}`}
-    </Text>
-  </View>
-);
-
+TrackListItem.PropTypes = {
+  track: PropTypes.object.isRequired
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -59,4 +51,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default TrackListItem;
+const mapDispatchToProps = dispatch => {
+  return {
+    handleSelectTrack: (track) => {
+      dispatch(loadTrack(track))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(TrackListItem);

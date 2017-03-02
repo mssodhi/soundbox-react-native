@@ -1,5 +1,6 @@
 import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './loginTypes';
 import { loadFavorites } from '../../../shared/components/favorites/favoritesActions'
+import { loadGenres, loadCharts } from '../../../shared/components/charts/chartsActions'
 import axios from 'axios'
 import qs from 'qs'
 
@@ -36,6 +37,8 @@ export const demoLogin = () => {
       }
     }));
     dispatch(loadFavorites('1209'));
+    dispatch(loadGenres())
+    dispatch(loadCharts('all-music'))
   };
 }
 
