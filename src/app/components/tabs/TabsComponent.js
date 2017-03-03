@@ -7,9 +7,9 @@ import Charts from '../charts/Charts'
 import Settings from '../settings/Settings'
 
 const routes = [
-  { key: 'homeTab', title: 'Home' },
-  { key: 'chartsTab', title: 'Charts' },
-  { key: 'settingsTab', title: 'Settings' }
+  { key: 'homeTab', title: 'Home', icon: 'home' },
+  { key: 'chartsTab', title: 'Charts', icon: 'signal' },
+  { key: 'settingsTab', title: 'Settings', icon: 'cogs' }
 ];
 
 class TabsComponent extends React.Component {
@@ -40,14 +40,15 @@ class TabsComponent extends React.Component {
   render() {
     const children = routes.map(tab => {
       return (
-        <TabBarIOS.Item
+        <Icon.TabBarItem
           key={tab.key}
+          iconName={tab.icon}
           title={tab.title}
           selected={this.state.selectedTab === tab.key}
           onPress={() => this._handlePress(tab)}
         >
           {this._renderTabContent(tab)}
-        </TabBarIOS.Item>
+        </Icon.TabBarItem>
       );
     });
 
