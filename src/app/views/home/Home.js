@@ -1,6 +1,5 @@
-import React, { PropTypes } from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
 import FavoritesList from '../../../shared/components/favorites/FavoritesList'
@@ -15,7 +14,7 @@ class Home extends React.Component {
             <Text style={styles.welcome}>Loading...</Text>
           </View>
         ) : (
-          <FavoritesList artists={favState.artists} />
+            <FavoritesList artists={favState.artists} />
         )}
       </View>
     )
