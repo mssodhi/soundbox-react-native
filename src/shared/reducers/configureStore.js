@@ -4,6 +4,6 @@ import rootReducer from './index'
 
 const enhancer = applyMiddleware(thunk)
 
-export default configureStore = (data={}) => {
+export default configureStore = (data = {}) => {
     return createStore(rootReducer, data, enhancer)
 }

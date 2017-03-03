@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { loadingTrack: false, currentTrack: action.payload.track });
 
     case LOAD_STREAM_URL_COMPLETED:
-        return Object.assign({}, state, { streamUrl: action.payload.streamUrl });
+      return Object.assign({}, state, { streamUrl: action.payload.streamUrl });
 
     default:
       return state;

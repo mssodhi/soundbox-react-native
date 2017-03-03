@@ -17,7 +17,7 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { loadingArtists: false, artists: action.payload });
 
     case LOAD_FAVORITES_TRACKS_COMPLETED:
-      return Object.assign({}, state, { loadingTracks: false, tracks: action.payload } );
+      return Object.assign({}, state, { loadingTracks: false, tracks: action.payload });
 
     default:
       return state;

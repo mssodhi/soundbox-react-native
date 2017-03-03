@@ -9,13 +9,13 @@ export const loadFavorites = (fbId) => {
       .then((favoriteArtists) => {
         let tracks = [];
         let artists = [];
-        for(var a = 0; a < favoriteArtists.length; a++) {
+        for (var a = 0; a < favoriteArtists.length; a++) {
           var artist = favoriteArtists[a];
 
           fetch(constructUserSongsUrl(artist.artist_id))
             .then((response) => response.json())
             .then((response) => {
-              for(var i = 0; i < response.length; i++) {
+              for (var i = 0; i < response.length; i++) {
                 tracks.push(response[i]);
               }
               dispatch(resolveTracks(tracks));
@@ -27,7 +27,7 @@ export const loadFavorites = (fbId) => {
           fetch(constructUserUrl(artist.artist_id))
             .then((response) => response.json())
             .then((res) => artists.push(res))
-            .then(() => dispatch(resolveArtists(artists)) )
+            .then(() => dispatch(resolveArtists(artists)))
             .catch((error) => {
               console.error(error);
             });

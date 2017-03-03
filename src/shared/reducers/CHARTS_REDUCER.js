@@ -17,10 +17,10 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { loadingCharts: false, tracks: action.payload });
 
     case LOAD_GENRES:
-      return Object.assign({}, state, { loadingGenres: true } );
+      return Object.assign({}, state, { loadingGenres: true });
 
     case LOAD_GENRES_COMPLETED:
-      return Object.assign({}, state, { loadingGenres: false, genres: action.payload } );
+      return Object.assign({}, state, { loadingGenres: false, genres: action.payload });
 
     default:
       return state;

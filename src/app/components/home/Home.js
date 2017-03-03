@@ -15,7 +15,7 @@ class Home extends React.Component {
           </View>
         ) : (
             <FavoritesList artists={favState.artists} />
-        )}
+          )}
       </View>
     )
   }

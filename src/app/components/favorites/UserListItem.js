@@ -10,7 +10,7 @@ class UserListItem extends React.Component {
     const { props: { handleSelectArtist } } = this
     let imageUrl = this.props.artist.avatar_url ? this.props.artist.avatar_url : ''
     return (
-      <TouchableHighlight onPress={()=> handleSelectArtist(this.props.artist)}>
+      <TouchableHighlight onPress={() => handleSelectArtist(this.props.artist)}>
         <View style={styles.container}>
           <Image source={{ uri: imageUrl }} style={styles.photo} />
           <Text style={styles.text}>
