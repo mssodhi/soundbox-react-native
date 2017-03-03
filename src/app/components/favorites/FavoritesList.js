@@ -22,8 +22,7 @@ export default class FavoritesList extends React.Component {
   }
   render() {
     return (
-      <ListView style={styles.container}
-        dataSource={this.state.dataSource}
+      <ListView dataSource={this.state.dataSource}
         renderRow={(artist) => <UserListItem artist={artist} navigator={this.props.navigator}></UserListItem>}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
@@ -36,10 +35,6 @@ FavoritesList.PropTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: 20,
-  },
   separator: {
     flex: 1,
     height: StyleSheet.hairlineWidth,

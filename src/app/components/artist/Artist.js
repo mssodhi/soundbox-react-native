@@ -24,8 +24,8 @@ class Artist extends React.Component {
 const styles = StyleSheet.create({
   home: {
     flex: 1,
-    flexDirection: 'column',
-    top: 44
+    paddingTop: 64,
+    paddingBottom: 48
   },
   container: {
     flex: 1,

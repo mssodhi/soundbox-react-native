@@ -15,9 +15,7 @@ class Home extends React.Component {
             <Text style={styles.welcome}>Loading...</Text>
           </View>
         ) : (
-            <View style={{flex: 1}}>
-              <FavoritesList artists={favState.artists} navigator={this.props.navigator} />
-            </View>
+            <FavoritesList artists={favState.artists} navigator={this.props.navigator} />
           )}
       </View>
     )
@@ -27,8 +25,8 @@ class Home extends React.Component {
 const styles = StyleSheet.create({
   home: {
     flex: 1,
-    flexDirection: 'column',
-    top: 44
+    paddingTop: 64,
+    paddingBottom: 48
   },
   container: {
     flex: 1,

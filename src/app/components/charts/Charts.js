@@ -8,26 +8,19 @@ import TrackList from '../track/TrackList'
 class Charts extends React.Component {
     render() {
         const { props: { chartsState } } = this
-        return (
-            <View style={styles.charts}>
-                {chartsState.loadingCharts ? (
-                    <View style={styles.container}>
-                        <Text style={styles.welcome}>Loading...</Text>
-                    </View>
-                ) : (
-                        <TrackList tracks={chartsState.tracks} />
-                    )}
+        if(chartsState.loadingCharts) {
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Loading...</Text>
             </View>
-        )
+        } else {
+            return (
+                <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
+            )
+        }
     }
 }
 
 const styles = StyleSheet.create({
-    charts: {
-        flex: 1,
-        flexDirection: 'column',
-        top: 44
-    },
     container: {
         flex: 1,
         alignItems: 'center',
