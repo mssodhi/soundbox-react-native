@@ -2,14 +2,13 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
-import { facebookLogin, demoLogin, logout } from './loginActions'
+
+import { facebookLogin, demoLogin } from './loginEffects'
 
 class Login extends React.Component {
   render() {
-    const { props: { user, handleFacebookLogin, handleDemoLogin } } = this
-
-    if(!user) {
-      return (
+    const { props: { handleFacebookLogin, handleDemoLogin } } = this
+    return (
         <View style={styles.container}>
           <View style={styles.instructions}>
             <Text>Choose Login method to start using the app</Text>
@@ -26,12 +25,6 @@ class Login extends React.Component {
           </View>
         </View>
       )
-    }
-    else {
-      return (
-        null
-      )
-    }
   }
 }
 
@@ -81,9 +74,6 @@ const mapDispatchToProps = dispatch => {
     },
     handleDemoLogin: () => {
       dispatch(demoLogin())
-    },
-    onError: (text) => {
-    	console.log('error');
     }
   }
 }

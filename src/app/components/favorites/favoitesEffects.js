@@ -1,5 +1,5 @@
-import { LOAD_FAVORITES, LOAD_FAVORITES_ARTISTS_COMPLETED, LOAD_FAVORITES_TRACKS_COMPLETED } from './favoritesTypes';
-import { constructUserUrl, constructUserSongsUrl, constructSongUrl } from '../../services/soundcloud.service';
+import { LOAD_FAVORITES, LOAD_FAVORITES_ARTISTS_COMPLETED, LOAD_FAVORITES_TRACKS_COMPLETED } from '../../../shared/constants/action-constants'
+import { constructUserUrl, constructUserSongsUrl, constructSongUrl } from '../../../shared/services/soundcloud.service'
 
 export const loadFavorites = (fbId) => {
   return dispatch => {

@@ -1,11 +1,10 @@
-
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, StatusBar, TabBarIOS } from 'react-native';
 import { connect } from 'react-redux'
 
-import * as CONFIG from './config';
-import TabsComponent from '../shared/components/tabs/TabsComponent'
-import Login from './views/login/Login'
+import * as CONFIG from '../shared/config';
+import TabsComponent from './components/tabs/TabsComponent'
+import Login from './components/login/Login'
 
 class App extends Component {
 
@@ -37,7 +36,7 @@ const styles = StyleSheet.create({
     width: CONFIG.SCREEN.WIDTH,
     backgroundColor: '#F5FCFF',
   }
-});
+})
 
 const mapStateToProps = state => {
   return {

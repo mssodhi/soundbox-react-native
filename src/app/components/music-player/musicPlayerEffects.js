@@ -1,7 +1,7 @@
-import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_STREAM_URL_COMPLETED } from './musicPlayerTypes';
+import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_STREAM_URL_COMPLETED } from '../../../shared/constants/action-constants'
 import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 
-import { constructStreamUrl } from '../../services/soundcloud.service';
+import { constructStreamUrl } from '../../../shared/services/soundcloud.service';
 
 export const loadTrack = (track) => {
     return dispatch => {

@@ -1,4 +1,4 @@
-import { LOAD_FAVORITES, LOAD_FAVORITES_ARTISTS_COMPLETED, LOAD_FAVORITES_TRACKS_COMPLETED } from './favoritesTypes';
+import { LOAD_FAVORITES, LOAD_FAVORITES_ARTISTS_COMPLETED, LOAD_FAVORITES_TRACKS_COMPLETED } from '../constants/action-constants'
 
 const initialState = {
   loadingTracks: null,

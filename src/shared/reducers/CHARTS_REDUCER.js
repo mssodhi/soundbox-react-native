@@ -1,4 +1,4 @@
-import { LOAD_CHARTS, LOAD_CHARTS_COMPLETED, LOAD_GENRES, LOAD_GENRES_COMPLETED } from './chartsTypes';
+import { LOAD_CHARTS, LOAD_CHARTS_COMPLETED, LOAD_GENRES, LOAD_GENRES_COMPLETED } from '../constants/action-constants'
 
 const initialState = {
   loadingCharts: null,

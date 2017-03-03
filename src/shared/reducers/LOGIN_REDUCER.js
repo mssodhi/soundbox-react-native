@@ -1,4 +1,4 @@
-import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './loginTypes';
+import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from '../constants/action-constants'
 import { Map } from 'immutable';
 
 export default (state = Map({}), action) => {

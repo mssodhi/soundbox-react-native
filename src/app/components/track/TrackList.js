@@ -1,8 +1,7 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View, Text, Image, ListView } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { connect } from 'react-redux'
-import TrackListItem from '../track/TrackListItem'
+import { StyleSheet, View, ListView } from 'react-native'
+
+import TrackListItem from './TrackListItem'
 
 class TrackList extends React.Component {
   constructor(props) {
@@ -23,9 +22,9 @@ class TrackList extends React.Component {
   }
   render() {
     return (
-          <ListView dataSource={this.state.dataSource} 
+          <ListView style={styles.container}
+          dataSource={this.state.dataSource} 
           renderRow={(track) => <TrackListItem track={track}></TrackListItem>} 
-          style={styles.container}
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
           />
       )
@@ -35,7 +34,6 @@ class TrackList extends React.Component {
 TrackList.PropTypes = {
   tracks: PropTypes.array.isRequired
 }
-
 
 const styles = StyleSheet.create({
   container: {

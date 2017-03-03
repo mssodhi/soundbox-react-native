@@ -1,4 +1,4 @@
-import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_STREAM_URL_COMPLETED } from './musicPlayerTypes';
+import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_STREAM_URL_COMPLETED } from '../constants/action-constants'
 
 const initialState = {
   currentTrack: null,

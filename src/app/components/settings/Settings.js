@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
-import { logout } from '../login/loginActions'
+import { logout } from '../login/loginEffects'
 
 class Settings extends React.Component {
     render() {

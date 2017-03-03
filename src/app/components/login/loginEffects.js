@@ -1,8 +1,6 @@
-import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './loginTypes';
-import { loadFavorites } from '../../../shared/components/favorites/favoritesActions'
-import { loadGenres, loadCharts } from '../../../shared/components/charts/chartsActions'
-import axios from 'axios'
-import qs from 'qs'
+import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './../../../shared/constants/action-constants'
+import { loadFavorites } from '../favorites/favoitesEffects'
+import { loadGenres, loadCharts } from '../charts/chartsEffects'
 
 export const logout = () => {
   return dispatch => {
@@ -13,16 +11,18 @@ export const logout = () => {
 }
 
 export const facebookLogin = () => {
-  console.log('in action fb');
   return dispatch => {
     dispatch({ type: AUTH_FACEBOOK });
     dispatch(resolve({
       details: {
         username: 'facebook user',
         name: 'Mark Z',
-        fbId: '-1'
+        fbId: '1209'
       }
-    }));
+    }))
+    dispatch(loadFavorites('1209'))
+    dispatch(loadCharts('all-music'))
+    dispatch(loadGenres())
   }
 }
 
@@ -35,11 +35,11 @@ export const demoLogin = () => {
         name: 'Demo Smith',
         fbId: '1209'
       }
-    }));
-    dispatch(loadFavorites('1209'));
-    dispatch(loadGenres())
+    }))
+    dispatch(loadFavorites('1209'))
     dispatch(loadCharts('all-music'))
-  };
+    dispatch(loadGenres())
+  }
 }
 
 const resolve = (data) => {

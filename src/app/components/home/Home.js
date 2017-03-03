@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-import FavoritesList from '../../../shared/components/favorites/FavoritesList'
+import FavoritesList from '../favorites/FavoritesList'
 
 class Home extends React.Component {
   render() {

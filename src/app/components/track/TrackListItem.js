@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 
-import { loadTrack } from '../music-player/musicPlayerActions'
+import { loadTrack } from '../music-player/musicPlayerEffects'
 
 class TrackListItem extends React.Component {
   constructor(props) {

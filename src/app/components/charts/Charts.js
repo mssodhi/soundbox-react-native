@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
-import TrackList from '../../../shared/components/track/TrackList'
+import TrackList from '../track/TrackList'
 
 class Charts extends React.Component {
     render() {
