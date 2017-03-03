@@ -1,18 +1,20 @@
-import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from '../constants/action-constants'
-import { Map } from 'immutable';
+import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_LOGOUT } from '../constants/action-constants'
 
-export default (state = Map({}), action) => {
+const initialState = {
+  loading: null,
+  user: null
+}
+
+export default (state = initialState, action) => {
   switch (action.type) {
     case AUTH_FACEBOOK:
-      return Map({loading: true});
+      return Object.assign({}, state, { loading: true })
     case AUTH_DEMO:
-      return Map({loading: true});
+      return Object.assign({}, state, { loading: true })
     case AUTH_RESOLVE:
-      return state.merge({loading: false, data: action.payload.data, loaded: true});
-    case AUTH_REJECT:
-      return state.merge({loading: false, error: action.payload.error, loaded: false});
+      return Object.assign({}, state, { loading: false, user: action.payload })
     case AUTH_LOGOUT:
-      return Map({});
+      return Object.assign({}, state, initialState)
     default:
       return state;
   }

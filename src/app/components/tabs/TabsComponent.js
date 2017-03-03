@@ -7,10 +7,10 @@ import Charts from '../charts/Charts'
 import Settings from '../settings/Settings'
 
 const routes = [
-      { key: 'homeTab', title: 'Home' },
-      { key: 'chartsTab', title: 'Charts' },
-      { key: 'settingsTab', title: 'Settings' }
-    ];
+  { key: 'homeTab', title: 'Home' },
+  { key: 'chartsTab', title: 'Charts' },
+  { key: 'settingsTab', title: 'Settings' }
+];
 
 class TabsComponent extends React.Component {
 
@@ -29,7 +29,7 @@ class TabsComponent extends React.Component {
       default:
         return <Home />
     }
-	}
+  }
 
   _handlePress(tab) {
     this.setState({
@@ -38,18 +38,18 @@ class TabsComponent extends React.Component {
   }
 
   render() {
-		const children = routes.map(tab => {
-			return (
-				<TabBarIOS.Item 
+    const children = routes.map(tab => {
+      return (
+        <TabBarIOS.Item
           key={tab.key}
-					title={tab.title}
+          title={tab.title}
           selected={this.state.selectedTab === tab.key}
           onPress={() => this._handlePress(tab)}
-          >
-				  { this._renderTabContent(tab) }
-				</TabBarIOS.Item>
-			);
-		});
+        >
+          {this._renderTabContent(tab)}
+        </TabBarIOS.Item>
+      );
+    });
 
     return (
       <TabBarIOS>

@@ -10,7 +10,7 @@ class Settings extends React.Component {
         const { props: { user, handleLogout } } = this
         return (
             <View style={styles.container}>
-                <Text style={styles.welcome}>{`${user.get('name')}, Welcome to React Native!`}</Text>
+                <Text style={styles.welcome}>{`${user.name}, Welcome to React Native!`}</Text>
                 <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
             </View>
         )
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
     return {
-        user: state.login.get('data').get('details')
+        user: state.login.user
     }
 }
 

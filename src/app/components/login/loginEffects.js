@@ -1,25 +1,17 @@
-import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_REJECT, AUTH_LOGOUT } from './../../../shared/constants/action-constants'
+import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_LOGOUT } from './../../../shared/constants/action-constants'
 import { loadFavorites } from '../favorites/favoitesEffects'
 import { loadGenres, loadCharts } from '../charts/chartsEffects'
 
-export const logout = () => {
-  return dispatch => {
-    dispatch({
-      type: AUTH_LOGOUT,
-    })
-  }
+const user = {
+  username: 'demo',
+  name: 'John Doe',
+  fbId: '1209'
 }
 
 export const facebookLogin = () => {
   return dispatch => {
     dispatch({ type: AUTH_FACEBOOK });
-    dispatch(resolve({
-      details: {
-        username: 'facebook user',
-        name: 'Mark Z',
-        fbId: '1209'
-      }
-    }))
+    dispatch(resolve(user))
     dispatch(loadFavorites('1209'))
     dispatch(loadCharts('all-music'))
     dispatch(loadGenres())
@@ -29,25 +21,25 @@ export const facebookLogin = () => {
 export const demoLogin = () => {
   return dispatch => {
     dispatch({ type: AUTH_DEMO });
-    dispatch(resolve({
-      details: {
-        username: 'demo',
-        name: 'Demo Smith',
-        fbId: '1209'
-      }
-    }))
+    dispatch(resolve(user))
     dispatch(loadFavorites('1209'))
     dispatch(loadCharts('all-music'))
     dispatch(loadGenres())
   }
 }
 
-const resolve = (data) => {
+export const logout = () => {
+  return dispatch => {
+    dispatch({
+      type: AUTH_LOGOUT,
+    })
+  }
+}
+
+const resolve = (user) => {
   return {
     type: AUTH_RESOLVE,
-    payload: {
-      data
-    }
+    payload: user
   }
 }
 

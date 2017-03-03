@@ -9,8 +9,8 @@ import Login from './components/login/Login'
 class App extends Component {
 
   render() {
-    const { props: { data } } = this
-    if (data) {
+    const { props: { loginState } } = this
+    if (loginState.user) {
       return (
         <TabsComponent style={styles.root} />
       );
@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    data: state.login.get('data')
+    loginState: state.login
   }
 }
 

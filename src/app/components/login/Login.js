@@ -59,14 +59,6 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = state => {
-  return {
-    user: state.login.get('data'),
-    loading: state.login.get('loading'),
-    error: state.login.get('error'),
-  }
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     handleFacebookLogin: () => {
@@ -78,4 +70,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);
