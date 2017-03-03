@@ -9,18 +9,29 @@ class Charts extends React.Component {
     render() {
         const { props: { chartsState } } = this
         if(chartsState.loadingCharts) {
-            <View style={styles.container}>
-                <Text style={styles.welcome}>Loading...</Text>
-            </View>
+            return (
+                <View style={styles.charts}>
+                    <View style={styles.container}>
+                        <Text style={styles.welcome}>Loading...</Text>
+                    </View>
+                </View>
+            )
         } else {
             return (
-                <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
+                <View style={styles.charts}>
+                    <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
+                </View>
             )
         }
     }
 }
 
 const styles = StyleSheet.create({
+    charts: {
+        flex: 1,
+        paddingTop: 64,
+        paddingBottom: 48
+    },
     container: {
         flex: 1,
         alignItems: 'center',
