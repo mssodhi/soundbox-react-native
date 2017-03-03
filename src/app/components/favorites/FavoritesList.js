@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View, ListView, Text } from 'react-native'
+import { StyleSheet, View, ListView } from 'react-native'
 
 import UserListItem from './UserListItem'
 
@@ -22,10 +22,9 @@ export default class FavoritesList extends React.Component {
   }
   render() {
     return (
-      <ListView
+      <ListView style={styles.container}
         dataSource={this.state.dataSource}
         renderRow={(artist) => <UserListItem artist={artist}></UserListItem>}
-        style={styles.container}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )

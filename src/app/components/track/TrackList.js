@@ -3,21 +3,21 @@ import { StyleSheet, View, ListView } from 'react-native'
 
 import TrackListItem from './TrackListItem'
 
-class TrackList extends React.Component {
+export default class TrackList extends React.Component {
+  ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+
   constructor(props) {
     super(props)
-    let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.state = {
-      dataSource: ds.cloneWithRows(props.tracks)
+      dataSource: this.ds.cloneWithRows(props.tracks)
     }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       nextProps.onError(nextProps.error);
     }
-    let ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     this.setState({
-      dataSource: ds.cloneWithRows(nextProps.tracks)
+      dataSource: this.ds.cloneWithRows(nextProps.tracks)
     })
   }
   render() {
@@ -46,5 +46,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#8E8E8E',
   }
 });
-
-export default TrackList;

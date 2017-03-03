@@ -12,7 +12,7 @@ class UserListItem extends React.Component {
     return (
       <TouchableHighlight onPress={() => handleSelectArtist(this.props.artist)}>
         <View style={styles.container}>
-          <Image source={{ uri: imageUrl }} style={styles.photo} />
+          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
           <Text style={styles.text}>
             {`${this.props.artist.username} - ${this.props.artist.track_count}`}
           </Text>

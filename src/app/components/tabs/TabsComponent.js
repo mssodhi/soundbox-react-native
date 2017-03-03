@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { TabBarIOS } from 'react-native'
+import { TabBarIOS, NavigatorIOS } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Home from '../home/Home'
@@ -21,13 +21,29 @@ class TabsComponent extends React.Component {
   _renderTabContent(tab) {
     switch (tab.key) {
       case 'homeTab':
-        return <Home />
+        return <NavigatorIOS style={{ flex: 1 }}
+          initialRoute={{
+            component: Home,
+            title: 'Home',
+          }} />
       case 'chartsTab':
-        return <Charts />
+        return <NavigatorIOS style={{ flex: 1 }}
+          initialRoute={{
+            component: Charts,
+            title: 'Charts',
+          }} />
       case 'settingsTab':
-        return <Settings />
+        return <NavigatorIOS style={{ flex: 1 }}
+          initialRoute={{
+            component: Settings,
+            title: 'Settings',
+          }} />
       default:
-        return <Home />
+        return <NavigatorIOS style={{ flex: 1 }}
+          initialRoute={{
+            component: Home,
+            title: 'Home',
+          }} />
     }
   }
 

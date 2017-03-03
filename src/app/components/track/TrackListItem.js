@@ -8,18 +8,13 @@ class TrackListItem extends React.Component {
   constructor(props) {
     super(props)
   }
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.error) {
-      nextProps.onError(nextProps.error);
-    }
-  }
   render() {
     const { props: { handleSelectTrack } } = this
     let imageUrl = this.props.track.artwork_url ? this.props.track.artwork_url : ''
     return (
       <TouchableHighlight onPress={() => handleSelectTrack(this.props.track)}>
         <View style={styles.container}>
-          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} alt="img" style={styles.photo} />
+          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
           <Text style={styles.text}>
             {`${this.props.track.title} - ${this.props.track.user.username}`}
           </Text>

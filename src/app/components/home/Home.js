@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   home: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#F5FCFF',
+    top: 44
   },
   container: {
     flex: 1,

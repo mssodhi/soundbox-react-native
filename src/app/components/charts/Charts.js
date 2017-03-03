@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
@@ -9,24 +9,34 @@ class Charts extends React.Component {
     render() {
         const { props: { chartsState } } = this
         return (
-            <View style={styles.home}>
-                {chartsState.tracks.length > 0 &&
-                    <TrackList tracks={chartsState.tracks} />
-                }
+            <View style={styles.charts}>
+                {chartsState.loadingCharts ? (
+                    <View style={styles.container}>
+                        <Text style={styles.welcome}>Loading...</Text>
+                    </View>
+                ) : (
+                        <TrackList tracks={chartsState.tracks} />
+                    )}
             </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    home: {
+    charts: {
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#F5FCFF',
+        top: 44
     },
     container: {
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    welcome: {
+        fontSize: 20,
+        textAlign: 'center',
+        margin: 10,
     }
 });
 
@@ -35,17 +45,5 @@ const mapStateToProps = state => {
         chartsState: state.charts
     }
 }
-
-// const mapDispatchToProps = dispatch => {
-//     return {
-//         handleLogout: () => {
-//             dispatch(logout());
-//         },
-//         onError: (text) => {
-//             console.log('error');
-//             // dispatch(openModal(text))
-//         }
-//     }
-// }
 
 export default connect(mapStateToProps, null)(Charts);
