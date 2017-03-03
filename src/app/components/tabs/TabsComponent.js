@@ -21,29 +21,13 @@ class TabsComponent extends React.Component {
   _renderTabContent(tab) {
     switch (tab.key) {
       case 'homeTab':
-        return <NavigatorIOS style={{ flex: 1 }}
-          initialRoute={{
-            component: Home,
-            title: 'Home',
-          }} />
+        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
       case 'chartsTab':
-        return <NavigatorIOS style={{ flex: 1 }}
-          initialRoute={{
-            component: Charts,
-            title: 'Charts',
-          }} />
+        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Charts, title: 'Charts' }} />
       case 'settingsTab':
-        return <NavigatorIOS style={{ flex: 1 }}
-          initialRoute={{
-            component: Settings,
-            title: 'Settings',
-          }} />
+        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Settings, title: 'Settings' }} />
       default:
-        return <NavigatorIOS style={{ flex: 1 }}
-          initialRoute={{
-            component: Home,
-            title: 'Home',
-          }} />
+        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
     }
   }
 

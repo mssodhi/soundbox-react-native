@@ -19,3 +19,7 @@ export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
 export const AUTH_DEMO = 'AUTH_DEMO';
 export const AUTH_RESOLVE = 'AUTH_RESOLVE';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
+
+// artist 
+export const LOAD_ARTIST_MUSIC = 'LOAD_ARTIST_MUSIC';
+export const LOAD_ARTIST_MUSIC_COMPLETED = 'LOAD_ARTIST_MUSIC_COMPLETED';

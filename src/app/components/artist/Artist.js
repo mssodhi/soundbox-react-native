@@ -1,23 +1,20 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
-import FavoritesList from '../favorites/FavoritesList'
+import TrackList from '../track/TrackList'
 
-class Home extends React.Component {
+class Artist extends React.Component {
   render() {
-    const { props: { favState } } = this
+    const { props: { artistState } } = this
     return (
       <View style={styles.home}>
-        {favState.loadingArtists ? (
+        {artistState.loadingTracks ? (
           <View style={styles.container}>
             <Text style={styles.welcome}>Loading...</Text>
           </View>
         ) : (
-            <View style={{flex: 1}}>
-              <FavoritesList artists={favState.artists} navigator={this.props.navigator} />
-            </View>
+            <TrackList tracks={artistState.tracks} />
           )}
       </View>
     )
@@ -44,8 +41,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    favState: state.favorites
+    artistState: state.artistState
   }
 }
 
-export default connect(mapStateToProps, null)(Home)
+export default connect(mapStateToProps, null)(Artist)

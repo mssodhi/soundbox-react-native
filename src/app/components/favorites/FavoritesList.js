@@ -24,7 +24,7 @@ export default class FavoritesList extends React.Component {
     return (
       <ListView style={styles.container}
         dataSource={this.state.dataSource}
-        renderRow={(artist) => <UserListItem artist={artist}></UserListItem>}
+        renderRow={(artist) => <UserListItem artist={artist} navigator={this.props.navigator}></UserListItem>}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
     )

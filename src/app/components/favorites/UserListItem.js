@@ -2,15 +2,24 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 
+import { loadArtistMusic } from '../artist/artistEffects'
+import Artist from '../artist/Artist'
+
 class UserListItem extends React.Component {
   constructor(props) {
     super(props)
   }
+  
+  _onArtistSelect(callback) {
+    callback(this.props.artist)
+    this.props.navigator.push({ component: Artist, title: this.props.artist.username })
+  }
+
   render() {
     const { props: { handleSelectArtist } } = this
     let imageUrl = this.props.artist.avatar_url ? this.props.artist.avatar_url : ''
     return (
-      <TouchableHighlight onPress={() => handleSelectArtist(this.props.artist)}>
+      <TouchableHighlight onPress={() => this._onArtistSelect(handleSelectArtist)}>
         <View style={styles.container}>
           <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
           <Text style={styles.text}>
@@ -47,8 +56,7 @@ const styles = StyleSheet.create({
 const mapDispatchToProps = dispatch => {
   return {
     handleSelectArtist: (artist) => {
-      console.log(artist);
-      // dispatch(loadTrack(track))
+      dispatch(loadArtistMusic(artist))
     }
   }
 }

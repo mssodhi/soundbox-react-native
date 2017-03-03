@@ -1,15 +1,17 @@
 import { combineReducers } from 'redux';
 
-import login from './LOGIN_REDUCER'
-import favorites from './FAVORITES_REDUCER'
-import musicPlayer from './MUSIC_PLAYER_REDUCER'
+import artistState from './ARTIST_REDUCER'
 import charts from './CHARTS_REDUCER'
+import favorites from './FAVORITES_REDUCER'
+import login from './LOGIN_REDUCER'
+import musicPlayer from './MUSIC_PLAYER_REDUCER'
 
 const rootReducer = combineReducers({
-  login,
+  artistState,
+  charts,
   favorites,
-  musicPlayer,
-  charts
+  login,
+  musicPlayer
 })
 
 export default rootReducer;

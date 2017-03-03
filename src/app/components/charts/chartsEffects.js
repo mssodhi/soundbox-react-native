@@ -25,7 +25,6 @@ export const loadGenres = () => {
 }
 
 const resolveCharts = (tracks) => {
-    console.log(tracks)
     return {
         type: LOAD_CHARTS_COMPLETED,
         payload: tracks
