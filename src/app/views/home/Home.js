@@ -3,37 +3,22 @@ import { StyleSheet, View, Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
-import { logout } from '../login/loginActions'
-import TrackList from '../../../shared/components/track/TrackList'
 import FavoritesList from '../../../shared/components/favorites/FavoritesList'
 
 class Home extends React.Component {
   render() {
-    const { props: { user, favState, handleLogout } } = this
-    if (user && !favState.loadingArtists && !favState.loadingArtists) {
-      return (
-        <View style={styles.home}>
+    const { props: { favState } } = this
+    return (
+      <View style={styles.home}>
+        {favState.loadingArtists ? (
           <View style={styles.container}>
-            <Text style={styles.welcome}>{`${user.get('details').get('name')}, Welcome to React Native!`}</Text>
-            <Icon.Button name="sign-out" backgroundColor="#d42828" onPress={handleLogout}>Logout</Icon.Button>
-          </View>
-          {favState.tracks.length > 0 && 
-            <TrackList tracks={favState.tracks} />
-          }
-          {/*{favState.artists.length > 0 &&
-            <FavoritesList artists={favState.artists} />
-          }*/}
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.container}>
-          <View style={styles.instructions}>
             <Text style={styles.welcome}>Loading...</Text>
           </View>
-        </View>
-      )
-    }
+        ) : (
+          <FavoritesList artists={favState.artists} />
+        )}
+      </View>
+    )
   }
 }
 
@@ -44,6 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   container: {
+    flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -56,22 +42,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => {
   return {
-    user: state.login.get('data'),
-    favState: state.favorites,
-    error: state.login.get('error'),
+    favState: state.favorites
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleLogout: () => {
-      dispatch(logout());
-    },
-    onError: (text) => {
-      console.log('error');
-      // dispatch(openModal(text))
-    }
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, null)(Home)

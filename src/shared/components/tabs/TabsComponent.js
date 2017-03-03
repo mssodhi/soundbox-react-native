@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import Home from '../../../app/views/home/Home'
 import Charts from '../../../app/views/charts/Charts'
+import Settings from '../../../app/views/settings/Settings'
 
 class TabsComponent extends React.Component {
 
@@ -49,7 +50,7 @@ class TabsComponent extends React.Component {
               selectedTab: 'greenTab'
             });
           }}>
-          <Home />
+          <Settings />
         </TabBarIOS.Item>
       </TabBarIOS>
     )
