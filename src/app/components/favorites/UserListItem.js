@@ -9,7 +9,7 @@ class UserListItem extends React.Component {
   constructor(props) {
     super(props)
   }
-  
+
   _onArtistSelect(callback) {
     callback(this.props.artist)
     this.props.navigator.push({ component: Artist, title: this.props.artist.username })

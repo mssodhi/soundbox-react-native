@@ -1,10 +1,10 @@
 import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
-import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_STREAM_URL_COMPLETED, PLAY, PAUSE } from '../constants/action-constants'
+import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_PLAYER_COMPLETED, PLAY, PAUSE } from '../constants/action-constants'
 
 const initialState = {
   currentTrack: null,
   tracks: [],
-  streamUrl: null,
+  player: null,
   loadingTrack: null,
   isPlaying: null
 }
@@ -18,15 +18,16 @@ export default (state = initialState, action) => {
     case LOAD_TRACK_COMPLETED:
       return Object.assign({}, state, { loadingTrack: false, currentTrack: action.payload });
 
-    case LOAD_STREAM_URL_COMPLETED:
-      return Object.assign({}, state, { streamUrl: action.payload });
+    case LOAD_PLAYER_COMPLETED:
+      return Object.assign({}, state, { isPlaying: true, player: ReactNativeAudioStreaming.play(action.payload, { showIniOSMediaCenter: true }) });
 
     case PLAY:
-      ReactNativeAudioStreaming.play(state.streamUrl, { showIniOSMediaCenter: true });
-      return Object.assing({}, state, { isPlaying: true })
+      ReactNativeAudioStreaming.resume()
+      return Object.assign({}, state, { isPlaying: true })
 
     case PAUSE:
-      return Object.assing({}, state, { isPlaying: false })
+      ReactNativeAudioStreaming.pause()
+      return Object.assign({}, state, { isPlaying: false })
 
     default:
       return state;
