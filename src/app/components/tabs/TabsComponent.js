@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { TabBarIOS, NavigatorIOS } from 'react-native'
+import { TabBarIOS, NavigatorIOS, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 import Home from '../home/Home'
@@ -12,6 +12,18 @@ const routes = [
   { key: 'settingsTab', title: 'Settings', icon: 'cogs' }
 ];
 
+const styles = {
+  navBackground: '#ff6347',
+  navTitle: '#fff',
+
+  tabBarBackground: '#222',
+  tabSelectedItem: '#fff'
+};
+
+const homeNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
+const chartsNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Charts, title: 'Charts' }} />
+const settingsNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Settings, title: 'Settings' }} />
+
 class TabsComponent extends React.Component {
 
   state = {
@@ -21,31 +33,27 @@ class TabsComponent extends React.Component {
   _renderTabContent(tab) {
     switch (tab.key) {
       case 'homeTab':
-        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
+        return homeNav
       case 'chartsTab':
-        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Charts, title: 'Charts' }} />
+        return chartsNav
       case 'settingsTab':
-        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Settings, title: 'Settings' }} />
+        return settingsNav
       default:
-        return <NavigatorIOS style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
+        return homeNav
     }
   }
 
-  _handlePress(tab) {
-    this.setState({
-      selectedTab: tab.key
-    })
-  }
-
   render() {
-    const children = routes.map(tab => {
+    const tabs = routes.map(tab => {
       return (
         <Icon.TabBarItem
           key={tab.key}
           iconName={tab.icon}
           title={tab.title}
           selected={this.state.selectedTab === tab.key}
-          onPress={() => this._handlePress(tab)}
+          onPress={() => this.setState({
+            selectedTab: tab.key
+          })}
         >
           {this._renderTabContent(tab)}
         </Icon.TabBarItem>
@@ -53,8 +61,8 @@ class TabsComponent extends React.Component {
     });
 
     return (
-      <TabBarIOS>
-        {children}
+      <TabBarIOS barTintColor={styles.tabBarBackground} tintColor={styles.tabSelectedItem}>
+        {tabs}
       </TabBarIOS>
     )
   }
