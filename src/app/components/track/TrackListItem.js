@@ -9,10 +9,10 @@ class TrackListItem extends React.Component {
     super(props)
   }
   render() {
-    const { props: { handleSelectTrack } } = this
+    const { props: { _handleSelectTrack } } = this
     let imageUrl = this.props.track.artwork_url ? this.props.track.artwork_url : ''
     return (
-      <TouchableHighlight onPress={() => handleSelectTrack(this.props.track)}>
+      <TouchableHighlight onPress={() => _handleSelectTrack(this.props.track)}>
         <View style={styles.container}>
           <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
           <Text style={styles.text}>{this.props.track.title}</Text>
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleSelectTrack: (track) => {
+    _handleSelectTrack: (track) => {
       dispatch(loadTrack(track))
     }
   }

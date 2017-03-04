@@ -15,6 +15,7 @@ export const LOAD_TRACK_COMPLETED = 'LOAD_TRACK_COMPLETED';
 export const LOAD_PLAYER_COMPLETED = 'LOAD_STREAM_URL_COMPLETED';
 export const PLAY = 'PLAY';
 export const PAUSE = 'PAUSE';
+export const SHUFFLE_PLAY = 'SHUFFLE_PLAY';
 
 // auth/login
 export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';

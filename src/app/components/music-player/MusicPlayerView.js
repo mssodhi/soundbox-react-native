@@ -3,11 +3,11 @@ import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
 
-import { play, pause } from './musicPlayerEffects'
+import { play, pause, skip_backward, skip_forward } from './musicPlayerEffects'
 
 class MusicPlayerView extends React.Component {
   render() {
-    const { props: { musicPlayer, handlePlay, handlePause, handleSkipBackward, handleSkipForward } } = this
+    const { props: { musicPlayer, dispatchPlay, dispatchPause, dispatchForward, dispatchBackward } } = this
     return (
       <View style={styles.container}>
         {musicPlayer.currentTrack &&
@@ -17,23 +17,23 @@ class MusicPlayerView extends React.Component {
             <Text style={styles.artistName}>{musicPlayer.currentTrack.user.username}</Text>
             <View style={styles.actions}>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { handleSkipBackward() }}>
+                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchBackward(musicPlayer) }}>
                   <Icon name="step-backward" style={{ fontSize: 20, color: '#fff' }} />
                 </TouchableHighlight>
               </View>
               <View style={{ margin: 10 }}>
                 {musicPlayer.isPlaying ? (
-                  <TouchableHighlight style={[styles.actionButton, styles.primaryButto]} underlayColor='#ff8c00' onPress={() => { handlePause() }}>
+                  <TouchableHighlight style={[styles.actionButton, styles.primaryButto]} underlayColor='#ff8c00' onPress={() => { dispatchPause() }}>
                     <Icon name="pause" style={{ fontSize: 20, color: '#fff' }} />
                   </TouchableHighlight>
                 ) : (
-                    <TouchableHighlight style={[styles.actionButton, styles.primaryButto]} underlayColor='#ff8c00' onPress={() => { handlePlay() }}>
+                    <TouchableHighlight style={[styles.actionButton, styles.primaryButto]} underlayColor='#ff8c00' onPress={() => { dispatchPlay() }}>
                       <Icon name="play" style={{ fontSize: 20, color: '#fff' }} />
                     </TouchableHighlight>
                   )}
               </View>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { handleSkipForward() }}>
+                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchForward(musicPlayer) }}>
                   <Icon name="step-forward" style={{ fontSize: 20, color: '#fff' }} />
                 </TouchableHighlight>
               </View>
@@ -105,17 +105,17 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    handlePlay: () => {
+    dispatchPlay: () => {
       dispatch(play())
     },
-    handlePause: () => {
+    dispatchPause: () => {
       dispatch(pause())
     },
-    handleSkipForward: () => {
-      console.log('forward')
+    dispatchForward: (state) => {
+      dispatch(skip_forward(state.currentTrack, state.tracks))
     },
-    handleSkipBackward: () => {
-      console.log('backward')
+    dispatchBackward: (state) => {
+      dispatch(skip_backward(state.currentTrack, state.tracks))
     }
   }
 }

@@ -1,9 +1,11 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View, ListView } from 'react-native'
-
+import { StyleSheet, View, ListView, Button } from 'react-native'
+import { connect } from 'react-redux'
 import TrackListItem from './TrackListItem'
 
-export default class TrackList extends React.Component {
+import { shuffle, loadTrack } from '../music-player/musicPlayerEffects'
+
+class TrackList extends React.Component {
   ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
   constructor(props) {
@@ -21,15 +23,20 @@ export default class TrackList extends React.Component {
     })
   }
   render() {
+    const { props: { _onShuffle } } = this
     return (
-      <ListView 
-        initialListSize={10}
-        pageSize={15}
-        removeClippedSubviews={true}
+      <View>
+        <Button
+          onPress={() => _onShuffle(this.props.tracks)}
+          title="Shuffle"
+          color="#841584"
+        />
+      <ListView
         dataSource={this.state.dataSource}
         renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
         renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
       />
+      </View>
     )
   }
 }
@@ -44,4 +51,15 @@ const styles = StyleSheet.create({
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
   }
-});
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    _onShuffle(tracks) {
+      dispatch(shuffle(tracks))
+      dispatch(loadTrack(tracks[Math.floor(Math.random()*tracks.length)]))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps) (TrackList)

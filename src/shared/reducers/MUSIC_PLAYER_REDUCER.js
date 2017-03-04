@@ -1,5 +1,5 @@
 import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
-import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_PLAYER_COMPLETED, PLAY, PAUSE } from '../constants/action-constants'
+import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_PLAYER_COMPLETED, PLAY, PAUSE, SHUFFLE_PLAY, SKIP_BACKWARD, SKIP_FORWARD } from '../constants/action-constants'
 
 const initialState = {
   currentTrack: null,
@@ -19,7 +19,8 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, { loadingTrack: false, currentTrack: action.payload });
 
     case LOAD_PLAYER_COMPLETED:
-      return Object.assign({}, state, { isPlaying: true, player: ReactNativeAudioStreaming.play(action.payload, { showIniOSMediaCenter: true }) });
+      ReactNativeAudioStreaming.play(action.payload, { showIniOSMediaCenter: true });
+      return Object.assign({}, state, { isPlaying: true });
 
     case PLAY:
       ReactNativeAudioStreaming.resume()
@@ -28,6 +29,23 @@ export default (state = initialState, action) => {
     case PAUSE:
       ReactNativeAudioStreaming.pause()
       return Object.assign({}, state, { isPlaying: false })
+
+    case SHUFFLE_PLAY:
+      return Object.assign({}, state, { tracks: action.payload })
+
+    case SKIP_BACKWARD:
+      var curIndex = state.tracks.indexOf(state.currentTrack)
+      var prevTrack = curIndex > 0 ? state.tracks[curIndex - 1] : null
+      if(prevTrack) {
+        return Object.assign({}, state, { currentTrack: prevTrack, isPlaying: true })
+      }
+
+    case SKIP_FORWARD:
+      var curIndex = state.tracks.indexOf(state.currentTrack)
+      var nextTrack = curIndex < state.tracks.length ? state.tracks[curIndex + 1] : null
+      if(nextTrack) {
+        return Object.assign({}, state, { currentTrack: nextTrack.json(), isPlaying: true })
+      }
 
     default:
       return state;
