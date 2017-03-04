@@ -5,17 +5,19 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Home from '../home/Home'
 import Charts from '../charts/Charts'
 import Settings from '../settings/Settings'
+import MusicPlayerView from '../music-player/MusicPlayerView'
 
 const routes = [
   { key: 'homeTab', title: 'Home', icon: 'home' },
   { key: 'chartsTab', title: 'Charts', icon: 'signal' },
-  { key: 'settingsTab', title: 'Settings', icon: 'cogs' }
+  { key: 'settingsTab', title: 'Settings', icon: 'cogs' },
+  { key: 'musicPlayer', title: 'Player', icon: 'play' }
 ];
 
 const styles = {
   navBackground: '#ff6347',
   navTitle: '#fff',
-
+  navTint: '#222',
   tabBarBackground: '#222',
   tabSelectedItem: '#fff'
 };
@@ -38,6 +40,8 @@ class TabsComponent extends React.Component {
         return chartsNav
       case 'settingsTab':
         return settingsNav
+      case 'musicPlayer':
+        return <MusicPlayerView />
       default:
         return homeNav
     }

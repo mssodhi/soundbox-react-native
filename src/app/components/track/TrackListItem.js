@@ -15,9 +15,7 @@ class TrackListItem extends React.Component {
       <TouchableHighlight onPress={() => handleSelectTrack(this.props.track)}>
         <View style={styles.container}>
           <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
-          <Text style={styles.text}>
-            {`${this.props.track.title} - ${this.props.track.user.username}`}
-          </Text>
+          <Text style={styles.text}>{this.props.track.title}</Text>
         </View>
       </TouchableHighlight>
     )

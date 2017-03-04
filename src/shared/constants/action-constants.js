@@ -1,4 +1,4 @@
-// charts 
+// charts
 export const LOAD_CHARTS = 'LOAD_CHARTS';
 export const LOAD_CHARTS_COMPLETED = 'LOAD_CHARTS_COMPLETED';
 export const LOAD_GENRES = 'LOAD_GENRES';
@@ -13,6 +13,8 @@ export const LOAD_FAVORITES_TRACKS_COMPLETED = 'LOAD_FAVORITES_TRACKS_COMPLETED'
 export const LOAD_TRACK = 'LOAD_TRACK';
 export const LOAD_TRACK_COMPLETED = 'LOAD_TRACK_COMPLETED';
 export const LOAD_STREAM_URL_COMPLETED = 'LOAD_STREAM_URL_COMPLETED';
+export const PLAY = 'PLAY';
+export const PAUSE = 'PAUSE';
 
 // auth/login
 export const AUTH_FACEBOOK = 'AUTH_FACEBOOK';
@@ -20,6 +22,6 @@ export const AUTH_DEMO = 'AUTH_DEMO';
 export const AUTH_RESOLVE = 'AUTH_RESOLVE';
 export const AUTH_LOGOUT = 'AUTH_LOGOUT';
 
-// artist 
+// artist
 export const LOAD_ARTIST_MUSIC = 'LOAD_ARTIST_MUSIC';
 export const LOAD_ARTIST_MUSIC_COMPLETED = 'LOAD_ARTIST_MUSIC_COMPLETED';
