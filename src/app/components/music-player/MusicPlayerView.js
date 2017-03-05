@@ -9,13 +9,17 @@ import { play, pause, skip_backward, skip_forward } from './musicPlayerEffects'
 class MusicPlayerView extends React.Component {
   render() {
     const { props: { musicPlayer, dispatchPlay, dispatchPause, dispatchForward, dispatchBackward } } = this
-    let imageUrl = musicPlayer.currentTrack.artwork_url ? { uri: musicPlayer.currentTrack.artwork_url.replace('large', 't500x500'), cache: 'force-cached' } : noImage
     return (
 
       <View style={styles.container}>
         {musicPlayer.currentTrack &&
           <View style={styles.body}>
-            <Image style={{ width: 250, height: 250 }} source={imageUrl} />
+            {musicPlayer.currentTrack.artwork_url ?
+              (<Image style={{ width: 250, height: 250 }} source={{ uri: musicPlayer.currentTrack.artwork_url.replace('large', 't500x500'), cache: 'force-cached' }} />)
+              :
+              (<Image style={{ width: 250, height: 250 }} source={noImage} />)
+            }
+
             <Text style={styles.trackName}>{musicPlayer.currentTrack.title}</Text>
             <Text style={styles.artistName}>{musicPlayer.currentTrack.user.username}</Text>
             <View style={styles.actions}>
