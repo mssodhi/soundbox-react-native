@@ -3,6 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 
 import { loadTrack } from '../music-player/musicPlayerEffects'
+const noImage = require('../../../shared/images/Wind-Vector-resize.png')
 
 class TrackListItem extends React.Component {
   constructor(props) {
@@ -10,11 +11,11 @@ class TrackListItem extends React.Component {
   }
   render() {
     const { props: { _handleSelectTrack } } = this
-    let imageUrl = this.props.track.artwork_url ? this.props.track.artwork_url : ''
+    let imageUrl = this.props.track.artwork_url ? { uri: this.props.track.artwork_url, cache: 'force-cached' } : noImage
     return (
       <TouchableHighlight onPress={() => _handleSelectTrack(this.props.track)}>
         <View style={styles.container}>
-          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
+          <Image source={imageUrl} style={styles.photo} />
           <Text style={styles.text}>{this.props.track.title}</Text>
         </View>
       </TouchableHighlight>

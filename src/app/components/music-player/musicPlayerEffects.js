@@ -84,10 +84,9 @@ const resolveStreamUrl = (streamUrl) => {
 }
 
 const updateMusicControls = (track, dispatch) => {
-  console.log('updating controls', track)
   MusicControl.setNowPlaying({
     title: track.title,
-    artwork: track.artwork_url,
+    artwork: track.artwork_url || '',
     artist: track.user.username,
     duration: track.duration / 1000,
     elapsedPlaybackTime: 0
@@ -103,12 +102,10 @@ const updateMusicControls = (track, dispatch) => {
   MusicControl.enableBackgroundMode(true);
 
   MusicControl.on('play', ()=> {
-    console.log('on play')
     dispatch(play())
   })
 
   MusicControl.on('pause', ()=> {
-    console.log('on pause')
     dispatch(pause())
   })
 
@@ -131,7 +128,7 @@ const updateMusicControls = (track, dispatch) => {
   MusicControl.on('rate', (rating)=> {}); // Android only (Percentage)
   MusicControl.on('volume', (volume)=> {}); // Android only (0 to maxVolume) - Only fired when remoteVolume is enabled
 
-  MusicControl.on('togglePlayPause', ()=> { console.log('toggle'); dispatch(play()) }); // iOS only
+  MusicControl.on('togglePlayPause', ()=> { dispatch(play()) }); // iOS only
   MusicControl.on('enableLanguageOption', ()=> {}); // iOS only
   MusicControl.on('disableLanguageOption', ()=> {}); // iOS only
   MusicControl.on('skipForward', ()=> { dispatch(skip_forward()) }); // iOS only

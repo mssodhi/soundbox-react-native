@@ -2,17 +2,20 @@ import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
+const noImage = require('../../../shared/images/Wind-Vector-resize.png')
 
 import { play, pause, skip_backward, skip_forward } from './musicPlayerEffects'
 
 class MusicPlayerView extends React.Component {
   render() {
     const { props: { musicPlayer, dispatchPlay, dispatchPause, dispatchForward, dispatchBackward } } = this
+    let imageUrl = musicPlayer.currentTrack.artwork_url ? { uri: musicPlayer.currentTrack.artwork_url.replace('large', 't500x500'), cache: 'force-cached' } : noImage
     return (
+
       <View style={styles.container}>
         {musicPlayer.currentTrack &&
           <View style={styles.body}>
-            <Image style={{ width: 250, height: 250 }} source={{ uri: musicPlayer.currentTrack.artwork_url.replace('large', 't500x500') }} />
+            <Image style={{ width: 250, height: 250 }} source={imageUrl} />
             <Text style={styles.trackName}>{musicPlayer.currentTrack.title}</Text>
             <Text style={styles.artistName}>{musicPlayer.currentTrack.user.username}</Text>
             <View style={styles.actions}>

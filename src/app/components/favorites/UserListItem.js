@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import { loadArtistMusic } from '../artist/artistEffects'
 import Artist from '../artist/Artist'
+const noImage = require('../../../shared/images/Wind-Vector-resize.png')
 
 class UserListItem extends React.Component {
   constructor(props) {
@@ -17,11 +18,11 @@ class UserListItem extends React.Component {
 
   render() {
     const { props: { handleSelectArtist } } = this
-    let imageUrl = this.props.artist.avatar_url ? this.props.artist.avatar_url : ''
+    let imageUrl = this.props.artist.avatar_url ? { uri: this.props.artist.avatar_url, cache: 'force-cache' } : noImage
     return (
       <TouchableHighlight onPress={() => this._onArtistSelect(handleSelectArtist)}>
         <View style={styles.container}>
-          <Image source={{ uri: imageUrl, cache: 'only-if-cached' }} style={styles.photo} />
+          <Image source={imageUrl} style={styles.photo} />
           <Text style={styles.text}>
             {`${this.props.artist.username} - ${this.props.artist.track_count}`}
           </Text>
