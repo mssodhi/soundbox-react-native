@@ -57,7 +57,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     _onShuffle(tracks) {
       dispatch(shuffle(tracks))
-      dispatch(loadTrack(tracks[Math.floor(Math.random()*tracks.length)]))
     }
   }
 }

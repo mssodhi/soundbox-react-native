@@ -1,5 +1,5 @@
+import { ReactNativeAudioStreaming } from 'react-native-audio-streaming';
 import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_PLAYER_COMPLETED, PLAY, PAUSE, SHUFFLE_PLAY } from '../../../shared/constants/action-constants'
-
 import { constructStreamUrl } from '../../../shared/services/soundcloud.service';
 
 export const loadTrack = (track) => {
@@ -10,27 +10,30 @@ export const loadTrack = (track) => {
   }
 }
 
-export const play = () => ({ type: PLAY })
-
-export const pause = () => ({ type: PAUSE })
-
-export const shuffle = (tracks) => ({ type: SHUFFLE_PLAY, payload: tracks })
-
-export const skip_backward = (stateCurrentTrack, stateTracks) => {
+export const shuffle = (tracks) => {
   return dispatch => {
-    if(stateTracks.length > 0) {
-      var curIndex = stateTracks.indexOf(stateCurrentTrack)
-      var prevTrack = curIndex > 0 ? stateTracks[curIndex - 1] : stateTracks[stateTracks.length - 1]
+    dispatch(loadTrack(tracks[Math.floor(Math.random()*tracks.length)]))
+    dispatch({ type: SHUFFLE_PLAY, payload: tracks })
+  }
+}
+
+export const skip_backward = () => {
+  return (dispatch, getState) => {
+    let state = getState().musicPlayer
+    if(state.tracks.length > 0) {
+      var curIndex = state.tracks.indexOf(state.currentTrack)
+      var prevTrack = curIndex > 0 ? state.tracks[curIndex - 1] : state.tracks[state.tracks.length - 1]
       prevTrack ? dispatch(loadTrack(prevTrack)) : ''
     }
   }
 }
 
-export const skip_forward = (stateCurrentTrack, stateTracks) => {
-  return dispatch => {
-    if(stateTracks.length > 0) {
-      var curIndex = stateTracks.indexOf(stateCurrentTrack)
-      var nextTrack = curIndex < stateTracks.length - 1 ? stateTracks[curIndex + 1] : stateTracks[0]
+export const skip_forward = () => {
+  return (dispatch, getState) => {
+    let state = getState().musicPlayer
+    if(state.tracks.length > 0) {
+      var curIndex = state.tracks.indexOf(state.currentTrack)
+      var nextTrack = curIndex < state.tracks.length - 1 ? state.tracks[curIndex + 1] : state.tracks[0]
       nextTrack ? dispatch(loadTrack(nextTrack)) : ''
     }
   }
@@ -38,4 +41,17 @@ export const skip_forward = (stateCurrentTrack, stateTracks) => {
 
 const resolveTrack = (track) => ({ type: LOAD_TRACK_COMPLETED, payload: track })
 
-const resolveStreamUrl = (streamUrl) => ({ type: LOAD_PLAYER_COMPLETED, payload: streamUrl })
+export const play = () => {
+  ReactNativeAudioStreaming.resume()
+  return { type: PLAY }
+}
+
+export const pause = () => {
+  ReactNativeAudioStreaming.pause()
+  return { type: PAUSE }
+}
+const resolveStreamUrl = (streamUrl) => {
+  ReactNativeAudioStreaming.play(streamUrl, { showIniOSMediaCenter: true })
+
+  return { type: LOAD_PLAYER_COMPLETED, payload: streamUrl }
+}

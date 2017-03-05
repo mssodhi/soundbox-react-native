@@ -17,7 +17,7 @@ class MusicPlayerView extends React.Component {
             <Text style={styles.artistName}>{musicPlayer.currentTrack.user.username}</Text>
             <View style={styles.actions}>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchBackward(musicPlayer) }}>
+                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchBackward() }}>
                   <Icon name="step-backward" style={{ fontSize: 20, color: '#fff' }} />
                 </TouchableHighlight>
               </View>
@@ -33,7 +33,7 @@ class MusicPlayerView extends React.Component {
                   )}
               </View>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchForward(musicPlayer) }}>
+                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchForward() }}>
                   <Icon name="step-forward" style={{ fontSize: 20, color: '#fff' }} />
                 </TouchableHighlight>
               </View>
@@ -111,11 +111,11 @@ const mapDispatchToProps = dispatch => {
     dispatchPause: () => {
       dispatch(pause())
     },
-    dispatchForward: (state) => {
-      dispatch(skip_forward(state.currentTrack, state.tracks))
+    dispatchForward: () => {
+      dispatch(skip_forward())
     },
-    dispatchBackward: (state) => {
-      dispatch(skip_backward(state.currentTrack, state.tracks))
+    dispatchBackward: () => {
+      dispatch(skip_backward())
     }
   }
 }
