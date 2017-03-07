@@ -5,12 +5,14 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 import Home from '../home/Home'
 import Charts from '../charts/Charts'
 import Settings from '../settings/Settings'
+import Search from '../search/Search'
 import MusicPlayerView from '../music-player/MusicPlayerView'
 
 const routes = [
   { key: 'homeTab', title: 'Home', icon: 'home' },
   { key: 'chartsTab', title: 'Charts', icon: 'signal' },
-  { key: 'settingsTab', title: 'Settings', icon: 'cogs' },
+  // { key: 'settingsTab', title: 'Settings', icon: 'cogs' },
+  { key: 'searchTab', title: 'Search', icon: 'search' },
   { key: 'musicPlayer', title: 'Player', icon: 'play' }
 ];
 
@@ -25,6 +27,7 @@ const styles = {
 const homeNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Home, title: 'Home' }} />
 const chartsNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Charts, title: 'Charts' }} />
 const settingsNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Settings, title: 'Settings' }} />
+const searchNav = <NavigatorIOS barTintColor={styles.navBackground} titleTextColor={styles.navTitle} tintColor={styles.navTint} style={{ flex: 1 }} initialRoute={{ component: Search, title: 'Search' }} />
 
 class TabsComponent extends React.Component {
 
@@ -40,6 +43,8 @@ class TabsComponent extends React.Component {
         return chartsNav
       case 'settingsTab':
         return settingsNav
+      case 'searchTab':
+        return searchNav
       case 'musicPlayer':
         return <MusicPlayerView />
       default:

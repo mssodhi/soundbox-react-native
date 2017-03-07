@@ -15,3 +15,7 @@ export const constructUserUrl = (userId) => {
 export const constructStreamUrl = (trackId) => {
 	return `http://api.soundcloud.com/tracks/${trackId}/stream?client_id=${CLIENT_ID}`;
 }
+
+export const constructSearchUrl = (query) => {
+  return `http://api.soundcloud.com/search/?q=${query}&limit=10&format=json&client_id=${CLIENT_ID}`
+}
