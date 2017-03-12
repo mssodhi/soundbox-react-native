@@ -18,7 +18,7 @@ class Charts extends React.Component {
       if(chartsState.tracks.length > 0) {
         return (
           <View style={styles.charts}>
-            <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
+            <TrackList tracks={chartsState.tracks}/>
           </View>
         )
       }

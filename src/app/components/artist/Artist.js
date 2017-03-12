@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   view: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48 + 170,
+    paddingBottom: 48,
     backgroundColor: '#222'
   },
   container: {

@@ -24,20 +24,24 @@ class TrackList extends React.Component {
     })
   }
 
+  _renderHeader() {
+    return (
+      <TouchableHighlight style={styles.customButton} onPress={() => _onShuffle(this.props.tracks)}>
+        <Text style={styles.shuffleText}>Shuffle</Text>
+      </TouchableHighlight>
+    )
+  }
+
   render() {
     const { props: { _onShuffle } } = this
     if (this.state.dataSource.getRowCount() > 0) {
       return (
-        <View style={styles.view}>
-          <TouchableHighlight style={styles.customButton} onPress={() => _onShuffle(this.props.tracks)}>
-            <Text style={styles.shuffleText}>Shuffle</Text>
-          </TouchableHighlight>
-          <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
-            renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-          />
-        </View>
+        <ListView
+          renderHeader={() => this._renderHeader()}
+          dataSource={this.state.dataSource}
+          renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
+          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+        />
       )
     }
   }
@@ -48,9 +52,6 @@ TrackList.PropTypes = {
 }
 
 const styles = StyleSheet.create({
-  view: {
-    paddingBottom: 58
-  },
   separator: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
