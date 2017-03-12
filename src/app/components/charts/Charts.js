@@ -8,20 +8,20 @@ import TrackList from '../track/TrackList'
 class Charts extends React.Component {
   render() {
     const { props: { chartsState } } = this
-    if (chartsState.loadingCharts || !chartsState.tracks.length) {
+    if (chartsState.loadingCharts) {
       return (
-        <View style={styles.charts}>
-          <View style={styles.container}>
-            <Text style={styles.welcome}>Loading...</Text>
-          </View>
+        <View style={styles.container}>
+          <Text style={styles.loading}>Loading...</Text>
         </View>
       )
     } else {
-      return (
-        <View style={styles.charts}>
-          <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
-        </View>
-      )
+      if(chartsState.tracks.length > 0) {
+        return (
+          <View style={styles.charts}>
+            <TrackList tracks={chartsState.tracks} navigator={this.props.navigator} />
+          </View>
+        )
+      }
     }
   }
 }
@@ -30,14 +30,14 @@ const styles = StyleSheet.create({
   charts: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48
+    paddingBottom: 48 + 37.5
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  welcome: {
+  loading: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,

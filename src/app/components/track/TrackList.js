@@ -14,6 +14,7 @@ class TrackList extends React.Component {
       dataSource: this.ds.cloneWithRows(props.tracks)
     }
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.error) {
       nextProps.onError(nextProps.error);
@@ -22,6 +23,7 @@ class TrackList extends React.Component {
       dataSource: this.ds.cloneWithRows(nextProps.tracks)
     })
   }
+
   render() {
     const { props: { _onShuffle } } = this
     if (this.state.dataSource.getRowCount() > 0) {

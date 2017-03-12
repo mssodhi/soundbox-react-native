@@ -8,17 +8,19 @@ import FavoritesList from '../favorites/FavoritesList'
 class Home extends React.Component {
   render() {
     const { props: { favState } } = this
-    return (
-      <View style={styles.home}>
-        {favState.loadingArtists ? (
-          <View style={styles.container}>
-            <Text style={styles.welcome}>Loading...</Text>
+    if(favState.loadingArtists) {
+      return (
+        <View style={styles.container}>
+            <Text style={styles.loading}>Loading...</Text>
           </View>
-        ) : (
-            <FavoritesList artists={favState.artists} navigator={this.props.navigator} />
-          )}
-      </View>
-    )
+      )
+    } else {
+      return (
+        <View style={styles.home}>
+          <FavoritesList artists={favState.artists} navigator={this.props.navigator} />
+        </View>
+      )
+    }
   }
 }
 
@@ -33,7 +35,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  welcome: {
+  loading: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
