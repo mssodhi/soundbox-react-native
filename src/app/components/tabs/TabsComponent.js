@@ -11,7 +11,7 @@ import MusicPlayerView from '../music-player/MusicPlayerView'
 const routes = [
   { key: 'homeTab', title: 'Home', icon: 'home' },
   { key: 'chartsTab', title: 'Charts', icon: 'signal' },
-  // { key: 'settingsTab', title: 'Settings', icon: 'cogs' },
+  { key: 'settingsTab', title: 'Settings', icon: 'cogs' },
   { key: 'searchTab', title: 'Search', icon: 'search' },
   { key: 'musicPlayer', title: 'Player', icon: 'play' }
 ];

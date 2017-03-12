@@ -24,20 +24,22 @@ class TrackList extends React.Component {
   }
   render() {
     const { props: { _onShuffle } } = this
-    return (
-      <View>
-        <Button
-          onPress={() => _onShuffle(this.props.tracks)}
-          title="Shuffle"
-          color="#841584"
-        />
-      <ListView
-        dataSource={this.state.dataSource}
-        renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-      />
-      </View>
-    )
+    if (this.state.dataSource.getRowCount() > 0) {
+      return (
+        <View>
+          <Button
+            onPress={() => _onShuffle(this.props.tracks)}
+            title="Shuffle"
+            color="#841584"
+          />
+          <ListView
+            dataSource={this.state.dataSource}
+            renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
+            renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+          />
+        </View>
+      )
+    }
   }
 }
 
@@ -61,4 +63,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(null, mapDispatchToProps) (TrackList)
+export default connect(null, mapDispatchToProps)(TrackList)

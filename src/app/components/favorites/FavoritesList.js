@@ -21,12 +21,14 @@ export default class FavoritesList extends React.Component {
     })
   }
   render() {
-    return (
-      <ListView dataSource={this.state.dataSource}
-        renderRow={(artist) => <UserListItem artist={artist} navigator={this.props.navigator}></UserListItem>}
-        renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
-      />
-    )
+    if (this.state.dataSource.getRowCount() > 0) {
+      return (
+        <ListView dataSource={this.state.dataSource}
+          renderRow={(artist) => <UserListItem artist={artist} navigator={this.props.navigator}></UserListItem>}
+          renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}
+        />
+      )
+    }
   }
 }
 
