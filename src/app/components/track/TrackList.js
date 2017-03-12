@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import { StyleSheet, View, ListView, Button } from 'react-native'
+import { StyleSheet, View, ListView, TouchableHighlight, Text } from 'react-native'
 import { connect } from 'react-redux'
 import TrackListItem from './TrackListItem'
 
@@ -28,12 +28,10 @@ class TrackList extends React.Component {
     const { props: { _onShuffle } } = this
     if (this.state.dataSource.getRowCount() > 0) {
       return (
-        <View>
-          <Button
-            onPress={() => _onShuffle(this.props.tracks)}
-            title="Shuffle"
-            color="#841584"
-          />
+        <View style={styles.view}>
+          <TouchableHighlight style={styles.customButton} onPress={() => _onShuffle(this.props.tracks)}>
+            <Text style={styles.shuffleText}>Shuffle</Text>
+          </TouchableHighlight>
           <ListView
             dataSource={this.state.dataSource}
             renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
@@ -50,10 +48,25 @@ TrackList.PropTypes = {
 }
 
 const styles = StyleSheet.create({
+  view: {
+    paddingBottom: 58
+  },
   separator: {
     flex: 1,
     height: StyleSheet.hairlineWidth,
     backgroundColor: '#8E8E8E',
+  },
+  customButton: {
+    margin: 5,
+    backgroundColor: '#ff6347',
+    borderRadius: 50,
+    alignSelf: 'center',
+    alignItems: 'center'
+  },
+  shuffleText: {
+    fontSize: 15,
+    margin: 15,
+    color: '#fff'
   }
 })
 

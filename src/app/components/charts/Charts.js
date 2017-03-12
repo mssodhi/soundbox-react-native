@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
   charts: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48 + 37.5
+    paddingBottom: 48,
+    backgroundColor: '#222'
   },
   container: {
     flex: 1,

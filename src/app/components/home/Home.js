@@ -28,7 +28,8 @@ const styles = StyleSheet.create({
   home: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48
+    paddingBottom: 48,
+    backgroundColor: '#222'
   },
   container: {
     flex: 1,

@@ -46,6 +46,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 12,
     fontSize: 16,
+    color: '#fff'
   },
   photo: {
     height: 40,
