@@ -7,17 +7,17 @@ export const loadFavorites = (fbId) => {
     fetch(`http://mssodhi.me/soundbox/api/favorites/getFavorites/user/${fbId}`)
       .then((response) => response.json())
       .then((favoriteArtists) => {
-        let tracks = [];
+        // let tracks = [];
         let artists = [];
         for (var i = 0; i < favoriteArtists.length; i++) {
           var artist = favoriteArtists[i];
 
-          fetch(constructUserSongsUrl(artist.artist_id))
-            .then((response) => response.json())
-            .then((response) => dispatch(resolveTracks(response.map(track => tracks.push(track)))))
-            .catch((error) => {
-              console.error(error);
-            });
+          // fetch(constructUserSongsUrl(artist.artist_id))
+          //   .then((response) => response.json())
+          //   .then((response) => dispatch(resolveTracks(response.map(track => tracks.push(track)))))
+          //   .catch((error) => {
+          //     console.error(error);
+          //   });
 
           fetch(constructUserUrl(artist.artist_id))
             .then((response) => response.json())

@@ -24,9 +24,9 @@ class TrackList extends React.Component {
     })
   }
 
-  _renderHeader() {
+  _renderHeader(callback) {
     return (
-      <TouchableHighlight style={styles.customButton} onPress={() => _onShuffle(this.props.tracks)}>
+      <TouchableHighlight style={styles.customButton} onPress={() => callback(this.props.tracks)}>
         <Text style={styles.shuffleText}>Shuffle</Text>
       </TouchableHighlight>
     )
@@ -37,7 +37,7 @@ class TrackList extends React.Component {
     if (this.state.dataSource.getRowCount() > 0) {
       return (
         <ListView
-          renderHeader={() => this._renderHeader()}
+          renderHeader={() => this._renderHeader(_onShuffle)}
           dataSource={this.state.dataSource}
           renderRow={(track) => <TrackListItem track={track}></TrackListItem>}
           renderSeparator={(sectionId, rowId) => <View key={rowId} style={styles.separator} />}

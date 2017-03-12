@@ -3,13 +3,15 @@ import { constructSearchUrl } from '../../../shared/services/soundcloud.service'
 
 export const search = (query) => {
   return dispatch => {
-    dispatch({ type: SEARCH });
-    fetch(constructSearchUrl(query))
-      .then((response) => response.json())
-      .then((searchResults) => dispatch(resolveSearch(searchResults.collection.filter(obj => obj.kind === 'user'))))
-      .catch((error) => {
-        console.error(error);
-      });
+    if (query != null && query.length > 0) {
+      dispatch({ type: SEARCH });
+      fetch(constructSearchUrl(query))
+        .then((response) => response.json())
+        .then((searchResults) => dispatch(resolveSearch(searchResults.collection.filter(obj => obj.kind === 'user'))))
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }
 }
 

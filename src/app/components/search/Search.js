@@ -13,10 +13,12 @@ class Search extends React.Component {
     return (
       <View style={styles.searchPage}>
         <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+          placeholder='Search'
+          style={styles.def}
+          clearButtonMode="while-editing"
           onChangeText={(text) => _handleSearch(text)}
         />
-        {searchState.results.length > 1 &&
+        {searchState.results.length > 0 &&
           <FavoritesList artists={searchState.results} navigator={this.props.navigator} />
         }
       </View>
@@ -28,7 +30,18 @@ const styles = StyleSheet.create({
   searchPage: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48
+    paddingBottom: 48,
+    backgroundColor: '#222'
+  },
+  def: {
+    height: 30,
+    borderWidth: 0.5,
+    borderColor: '#0f0f0f',
+    borderRadius: 3,
+    margin: 5,
+    backgroundColor: '#fff',
+    fontSize: 13,
+    padding: 4,
   },
   container: {
     flex: 1,

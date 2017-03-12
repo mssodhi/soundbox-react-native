@@ -24,9 +24,11 @@ class MusicPlayerView extends React.Component {
             <Text style={styles.artistName}>{musicPlayer.currentTrack.user.username}</Text>
             <View style={styles.actions}>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchBackward() }}>
-                  <Icon name="step-backward" style={{ fontSize: 20, color: '#fff' }} />
-                </TouchableHighlight>
+                {musicPlayer.tracks.length > 0 &&
+                  <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchBackward() }}>
+                    <Icon name="step-backward" style={{ fontSize: 20, color: '#fff' }} />
+                  </TouchableHighlight>
+                }
               </View>
               <View style={{ margin: 10 }}>
                 {musicPlayer.isPlaying ? (
@@ -40,9 +42,11 @@ class MusicPlayerView extends React.Component {
                   )}
               </View>
               <View style={{ margin: 10 }}>
-                <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchForward() }}>
-                  <Icon name="step-forward" style={{ fontSize: 20, color: '#fff' }} />
-                </TouchableHighlight>
+                {musicPlayer.tracks.length > 0 &&
+                  <TouchableHighlight style={[styles.actionButton, styles.secondaryButton]} underlayColor='#a9a9a9' onPress={() => { dispatchForward() }}>
+                    <Icon name="step-forward" style={{ fontSize: 20, color: '#fff' }} />
+                  </TouchableHighlight>
+                }
               </View>
             </View>
           </View>
