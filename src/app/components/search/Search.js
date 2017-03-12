@@ -14,7 +14,7 @@ class Search extends React.Component {
       <View style={styles.searchPage}>
         <TextInput
           placeholder='Search'
-          style={styles.def}
+          style={styles.default}
           clearButtonMode="while-editing"
           onChangeText={(text) => _handleSearch(text)}
         />
@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     paddingBottom: 48,
     backgroundColor: '#222'
   },
-  def: {
+  default: {
     height: 30,
     borderWidth: 0.5,
     borderColor: '#0f0f0f',
@@ -42,16 +42,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     fontSize: 13,
     padding: 4,
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
   }
 });
 
