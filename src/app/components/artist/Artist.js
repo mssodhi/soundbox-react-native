@@ -1,17 +1,18 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
-
 import TrackList from '../track/TrackList'
+import ArtistCard from './artist-card'
 
 class Artist extends React.Component {
   render() {
     const { props: { artistState } } = this
     return (
-      <View style={styles.home}>
+      <View style={styles.view}>
+        <ArtistCard artist={artistState.artist}/>
         {artistState.loadingTracks ? (
           <View style={styles.container}>
-            <Text style={styles.welcome}>Loading...</Text>
+            <Text style={styles.loading}>Loading...</Text>
           </View>
         ) : (
             <TrackList tracks={artistState.tracks} />
@@ -22,10 +23,10 @@ class Artist extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  home: {
+  view: {
     flex: 1,
     paddingTop: 64,
-    paddingBottom: 48,
+    paddingBottom: 48 + 170,
     backgroundColor: '#222'
   },
   container: {
@@ -33,10 +34,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  welcome: {
+  loading: {
     fontSize: 20,
     textAlign: 'center',
     margin: 10,
+    color: '#fff'
   }
 });
 
