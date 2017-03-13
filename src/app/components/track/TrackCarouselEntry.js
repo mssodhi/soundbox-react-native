@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 
 import styles from './TrackCarouselStyles';
 import { loadTrack } from '../music-player/musicPlayerEffects'
+const noImage = require('../../../shared/images/Wind-Vector-resize.png')
 
 class TrackCarouselEntry extends React.Component {
 
@@ -13,7 +14,7 @@ class TrackCarouselEntry extends React.Component {
 
   render() {
     const { props: { _handleSelectTrack } } = this
-    let imageUrl = this.props.track.artwork_url ? { uri: this.props.track.artwork_url.replace('large', 't500x500'), cache: 'force-cached' } : ''
+    let imageUrl = this.props.track.artwork_url ? { uri: this.props.track.artwork_url.replace('large', 't500x500'), cache: 'force-cached' } : noImage
 
     return (
       <TouchableOpacity

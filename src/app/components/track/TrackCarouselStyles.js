@@ -37,10 +37,12 @@ export default StyleSheet.create({
     },
     image: {
         ...StyleSheet.absoluteFillObject,
-        // resizeMode: 'cover',
+        resizeMode: 'cover',
         borderRadius: Platform.OS === 'ios' ? entryBorderRadius : 0,
         borderTopLeftRadius: entryBorderRadius,
-        borderTopRightRadius: entryBorderRadius
+        borderTopRightRadius: entryBorderRadius,
+        height: 180,
+        width: 269,
     },
 
     // image's border radius is buggy on ios; let's hack it!
