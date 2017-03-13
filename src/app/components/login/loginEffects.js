@@ -39,7 +39,8 @@ export const logout = () => {
 export const login = (user) => {
   return dispatch => {
     dispatch(loadFavorites(user.fbId));
-    dispatch(loadCharts('all-music'));
+    let genre = {name: 'All Music', value: 'all-music'}
+    dispatch(loadCharts(genre));
     dispatch(loadGenres());
     dispatch({ type: AUTH_RESOLVE, payload: user });
   }
