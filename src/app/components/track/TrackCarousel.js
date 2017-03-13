@@ -31,7 +31,7 @@ class TrackCarousel extends React.Component {
     return (
       <View>
         <TouchableHighlight style={{ margin: 5, backgroundColor: '#ff6347', borderRadius: 50, alignSelf: 'center', alignItems: 'center' }}
-          onPress={() => _onShuffle(chartsState.tracks)}
+          onPress={() => _onShuffle(this.props.tracks)}
         >
           <Text style={{fontSize: 15, margin: 15, color: '#fff'}}>Shuffle</Text>
         </TouchableHighlight>
