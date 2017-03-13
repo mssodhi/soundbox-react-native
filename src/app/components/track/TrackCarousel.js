@@ -1,9 +1,14 @@
 import React, { PropTypes } from 'react'
+import { View, TouchableHighlight, Text } from 'react-native'
+
 import Carousel from 'react-native-snap-carousel'
+import { connect } from 'react-redux'
+
 import TrackCarouselEntry from './TrackCarouselEntry'
 import styles, { sliderWidth, itemWidth } from './TrackCarouselStyles'
+import { shuffle } from '../music-player/musicPlayerEffects'
 
-export default class TrackCarousel extends React.Component {
+class TrackCarousel extends React.Component {
 
   constructor(props) {
     super(props)
@@ -15,28 +20,35 @@ export default class TrackCarousel extends React.Component {
         <TrackCarouselEntry
           key={track.id}
           track={track}
+          style={{ position: 'absolute', top: 5 }}
         />
       );
     });
   }
 
   render() {
+    const { props: { _onShuffle } } = this
     return (
-      <Carousel
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
-        firstItem={0}
-        inactiveSlideScale={0.94}
-        inactiveSlideOpacity={0.6}
-        enableSnap={false}
-        containerCustomStyle={styles.slider}
-        contentContainerCustomStyle={styles.sliderContainer}
-        showsHorizontalScrollIndicator={false}
-        removeClippedSubviews={false}
-        style={{marginTop: 10}}
-      >
-        {this.getSlides()}
-      </Carousel>
+      <View>
+        <TouchableHighlight style={{ margin: 5, backgroundColor: '#ff6347', borderRadius: 50, alignSelf: 'center', alignItems: 'center' }}
+          onPress={() => _onShuffle(chartsState.tracks)}
+        >
+          <Text style={{fontSize: 15, margin: 15, color: '#fff'}}>Shuffle</Text>
+        </TouchableHighlight>
+
+        <Carousel
+          sliderWidth={sliderWidth}
+          itemWidth={itemWidth}
+          firstItem={0}
+          inactiveSlideScale={0.95}
+          inactiveSlideOpacity={0.75}
+          enableSnap={false}
+          showsHorizontalScrollIndicator={false}
+          removeClippedSubviews={true}
+        >
+          {this.getSlides()}
+        </Carousel>
+      </View>
     )
   }
 }
@@ -44,3 +56,13 @@ export default class TrackCarousel extends React.Component {
 TrackCarousel.PropTypes = {
   tracks: PropTypes.array.isRequired
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    _onShuffle(tracks) {
+      dispatch(shuffle(tracks))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(TrackCarousel);

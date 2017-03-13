@@ -12,11 +12,17 @@ const slideWidth = wp(75);
 
 export const sliderWidth = viewportWidth;
 export const itemHorizontalMargin = wp(2);
-export const itemWidth = slideWidth + itemHorizontalMargin * 2;
+export const itemWidth = slideWidth + itemHorizontalMargin * .5;
 
 const entryBorderRadius = 8;
 
 export default StyleSheet.create({
+    slider: {
+      marginBottom: 30
+    },
+    sliderContainer: {
+      position: 'relative'
+    },
     slideInnerContainer: {
         width: itemWidth,
         height: slideHeight,
