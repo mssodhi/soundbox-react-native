@@ -45,6 +45,7 @@ class TrackCarousel extends React.Component {
           enableSnap={false}
           showsHorizontalScrollIndicator={false}
           removeClippedSubviews={true}
+          style={{marginTop: 5}}
         >
           {this.getSlides()}
         </Carousel>
