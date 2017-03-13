@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { connect } from 'react-redux'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import Loading from '../loading/Loading'
 import FavoritesList from '../favorites/FavoritesList'
 
 class Home extends React.Component {
@@ -10,9 +10,7 @@ class Home extends React.Component {
     const { props: { favState } } = this
     if(favState.loadingArtists) {
       return (
-        <View style={styles.container}>
-            <Text style={styles.loading}>Loading...</Text>
-          </View>
+        <Loading/>
       )
     } else {
       return (
@@ -30,18 +28,6 @@ const styles = StyleSheet.create({
     paddingTop: 64,
     paddingBottom: 48,
     backgroundColor: '#222'
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#222'
-  },
-  loading: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: '#fff'
   }
 });
 

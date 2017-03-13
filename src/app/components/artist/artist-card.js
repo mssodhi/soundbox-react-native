@@ -12,8 +12,8 @@ export default class ArtistCard extends React.Component {
   render() {
     return (
       <View style={styles.card}>
-          <Image style={styles.backgroundImage} source={noImage}/>
-          <Image style={styles.avatar} source={{uri: this.props.artist.avatar_url}}/>
+        <Image style={styles.backgroundImage} source={noImage} />
+        <Image style={styles.avatar} source={{ uri: this.props.artist.avatar_url }} />
       </View>
     )
   }

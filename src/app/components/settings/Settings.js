@@ -7,7 +7,7 @@ import { logout } from '../login/loginEffects'
 
 class Settings extends React.Component {
   render() {
-    const { props: { user, handleLogout } } = this
+    const { user, handleLogout } = this.props
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>{`${user.name}, Welcome to React Native!`}</Text>

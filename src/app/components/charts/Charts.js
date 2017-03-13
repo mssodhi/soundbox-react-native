@@ -1,24 +1,33 @@
-import React, { PropTypes } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React from 'react'
+import { StyleSheet, View, Text, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
 
+import TrackCarousel from '../track/TrackCarousel'
 import TrackList from '../track/TrackList'
+import { shuffle } from '../music-player/musicPlayerEffects'
+import Loading from '../loading/Loading'
 
 class Charts extends React.Component {
+
   render() {
-    const { props: { chartsState } } = this
+    const { props: { chartsState, _onShuffle } } = this
     if (chartsState.loadingCharts) {
       return (
-        <View style={styles.container}>
-          <Text style={styles.loading}>Loading...</Text>
-        </View>
+        <Loading />
       )
     } else {
-      if(chartsState.tracks.length > 0) {
+      if (chartsState.tracks.length > 0) {
         return (
           <View style={styles.charts}>
-            <TrackList tracks={chartsState.tracks}/>
+
+            <View style={{marginTop: 25}}>
+              <TouchableHighlight style={styles.customButton} onPress={() => _onShuffle(chartsState.tracks)}>
+                <Text style={styles.shuffleText}>Shuffle</Text>
+              </TouchableHighlight>
+              <TrackCarousel style={{}} tracks={chartsState.tracks} />
+            </View>
+
+            {/*<TrackList tracks={chartsState.tracks}/>*/}
           </View>
         )
       }
@@ -28,21 +37,21 @@ class Charts extends React.Component {
 
 const styles = StyleSheet.create({
   charts: {
-    flex: 1,
+    flex: .2,
     paddingTop: 64,
     paddingBottom: 48,
     backgroundColor: '#222'
   },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#222'
+  customButton: {
+    margin: 5,
+    backgroundColor: '#ff6347',
+    borderRadius: 50,
+    alignSelf: 'center',
+    alignItems: 'center'
   },
-  loading: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
+  shuffleText: {
+    fontSize: 15,
+    margin: 15,
     color: '#fff'
   }
 });
@@ -53,4 +62,11 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, null)(Charts);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    _onShuffle(tracks) {
+      dispatch(shuffle(tracks))
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Charts);
