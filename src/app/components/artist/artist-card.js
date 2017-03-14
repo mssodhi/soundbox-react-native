@@ -10,10 +10,11 @@ export default class ArtistCard extends React.Component {
   }
 
   render() {
+    let imageUrl = this.props.artist.avatar_url ? { uri: this.props.artist.avatar_url.replace('large', 't500x500'), cache: 'force-cached' } : noImage
     return (
       <View style={styles.card}>
         <Image style={styles.backgroundImage} source={noImage} />
-        <Image style={styles.avatar} source={{ uri: this.props.artist.avatar_url }} />
+        <Image style={styles.avatar} source={imageUrl} />
       </View>
     )
   }
@@ -30,15 +31,15 @@ const styles = StyleSheet.create({
     borderWidth: 1
   },
   backgroundImage: {
-    height: 60,
+    height: 75,
     width: width - 20,
     overflow: 'hidden'
   },
   avatar: {
-    height: 75,
-    width: 75,
-    borderRadius: 40,
-    marginTop: -25,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
+    marginTop: -40,
     alignSelf: 'center'
   }
 });

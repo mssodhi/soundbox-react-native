@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image, TouchableHighlight } from 'react-native'
 import { connect } from 'react-redux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { loadArtistMusic } from '../artist/artistEffects'
 import Artist from '../artist/Artist'
@@ -21,11 +22,12 @@ class UserListItem extends React.Component {
     let imageUrl = this.props.artist.avatar_url ? { uri: this.props.artist.avatar_url, cache: 'force-cache' } : noImage
     return (
       <TouchableHighlight onPress={() => this._onArtistSelect(handleSelectArtist)}>
-        <View style={styles.container}>
-          <Image source={imageUrl} style={styles.photo} />
-          <Text style={styles.text}>
-            {`${this.props.artist.username} - ${this.props.artist.track_count}`}
-          </Text>
+        <View style={styles.row}>
+          <View style={styles.left}>
+            <Image source={imageUrl} style={styles.photo} />
+            <Text style={styles.text}>{this.props.artist.username}</Text>
+          </View>
+          <Icon name='chevron-right' size={20} style={styles.icon} />
         </View>
       </TouchableHighlight>
     )
@@ -37,21 +39,31 @@ UserListItem.PropTypes = {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 10,
+  },
+  left: {
+    alignSelf: 'flex-start',
     flex: 1,
-    padding: 12,
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  text: {
-    marginLeft: 12,
-    fontSize: 16,
-    color: '#fff'
   },
   photo: {
     height: 40,
     width: 40,
     borderRadius: 20,
+  },
+  text: {
+    marginLeft: 12,
+    fontSize: 16,
+    color: '#fff',
+  },
+  icon: {
+    color: '#fff',
+    margin: 10,
+    width: 20,
   }
 });
 
