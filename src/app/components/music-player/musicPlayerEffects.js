@@ -6,7 +6,18 @@ import { LOAD_TRACK, LOAD_TRACK_COMPLETED, LOAD_PLAYER_COMPLETED, PLAY, PAUSE, S
 import { constructStreamUrl } from '../../../shared/services/soundcloud.service';
 
 export const loadTrack = (track) => {
-  return dispatch => {
+  return (dispatch, getState) => {
+    fetch('http://mssodhi.me:3000/songs/add', {
+      method: 'POST',
+      headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        userId: getState().login.user.fbId,
+        track: track
+      })
+    })
     dispatch({ type: LOAD_TRACK });
     dispatch(resolveTrack(track));
     dispatch(resolveStreamUrl(constructStreamUrl(track.id)));
