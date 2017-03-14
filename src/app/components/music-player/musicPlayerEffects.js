@@ -84,9 +84,13 @@ const resolveStreamUrl = (streamUrl) => {
 }
 
 const updateMusicControls = (track, dispatch) => {
+  let image = ''
+  if(track.artwork_url) {
+    image = track.artwork_url.replace('large', 't500x500')
+  }
   MusicControl.setNowPlaying({
     title: track.title,
-    artwork: track.artwork_url || '',
+    artwork: image,
     artist: track.user.username,
     duration: track.duration / 1000,
     elapsedPlaybackTime: 0
