@@ -54,7 +54,6 @@ const mapStateToProps = state => {
 const mapDispatchToState = dispatch => {
   return {
     _handleSearch: (query) => {
-      console.log(query)
       dispatch(search(query))
     }
   }

@@ -3,19 +3,22 @@ import { StyleSheet, ScrollView, Text, View } from 'react-native'
 import { connect } from 'react-redux'
 import TrackList from '../track/TrackList'
 import ArtistCard from './artist-card'
+import Loading from '../loading/Loading'
 
 class Artist extends React.Component {
   render() {
     const { props: { artistState } } = this
     return (
       <ScrollView style={styles.view}>
-        <ArtistCard artist={artistState.artist}/>
+        <ArtistCard artist={artistState.artist} />
         {artistState.loadingTracks ? (
-          <View style={styles.container}>
-            <Text style={styles.loading}>Loading...</Text>
-          </View>
+          <Loading/>
         ) : (
-            <TrackList tracks={artistState.tracks} />
+            <View>
+              {artistState.tracks.length > 0 &&
+                <TrackList tracks={artistState.tracks} />
+              }
+            </View>
           )}
       </ScrollView>
     )
@@ -27,17 +30,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingBottom: 48,
     backgroundColor: '#222'
-  },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loading: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-    color: '#fff'
   }
 });
 
