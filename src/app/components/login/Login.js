@@ -2,10 +2,39 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
-
+import { GraphRequest, GraphRequestManager, LoginManager } from 'react-native-fbsdk'
 import { facebookLogin, demoLogin } from './loginEffects'
 
 class Login extends React.Component {
+
+  _handleLoginManager(callback) {
+    LoginManager.logInWithReadPermissions(['public_profile']).then(result => {
+      if (result.isCancelled) {
+        alert('Login cancelled');
+      } else if (result.grantedPermissions.length == 0) {
+        alert("Error loging in");
+      } else {
+        this._fetchFacebookProfile(callback);
+      }
+    })
+  }
+
+  _fetchFacebookProfile(callback) {
+    let req = new GraphRequest(
+      '/me',
+      null,
+      fcn = (error, response) => {
+        if(error) {
+          alert("Error loggin in");
+        }
+        if(response.id) {
+          callback(response);
+        }
+      }
+    )
+    new GraphRequestManager().addRequest(req).start();
+  }
+
   render() {
     const { props: { handleFacebookLogin, handleDemoLogin } } = this
     return (
@@ -16,7 +45,7 @@ class Login extends React.Component {
         <View style={styles.body}>
           <View style={styles.buttonContainer}>
             <View style={styles.method}>
-              <Icon.Button name="facebook" onPress={handleFacebookLogin}>Login with Facebook</Icon.Button>
+              <Icon.Button name="facebook" onPress={this._handleLoginManager.bind(this, handleFacebookLogin)}>Login with Facebook</Icon.Button>
             </View>
             <View style={styles.method}>
               <Icon.Button name="sign-in" backgroundColor="#d42828" onPress={handleDemoLogin}>Demo</Icon.Button>
@@ -61,8 +90,8 @@ const styles = StyleSheet.create({
 
 const mapDispatchToProps = dispatch => {
   return {
-    handleFacebookLogin: () => {
-      dispatch(facebookLogin())
+    handleFacebookLogin: (user) => {
+      dispatch(facebookLogin(user))
     },
     handleDemoLogin: () => {
       dispatch(demoLogin())

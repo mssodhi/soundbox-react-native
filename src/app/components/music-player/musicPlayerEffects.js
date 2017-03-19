@@ -14,7 +14,7 @@ export const loadTrack = (track) => {
       'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        userId: getState().login.user.fbId,
+        userId: getState().login.user.fb_id,
         track: track
       })
     })

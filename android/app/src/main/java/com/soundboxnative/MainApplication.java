@@ -4,6 +4,7 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
+import com.facebook.reactnative.androidsdk.FBSDKPackage;
 import com.tanguyantoine.react.MusicControl;
 import com.audioStreaming.ReactNativeAudioStreamingPackage;
 import com.zmxv.RNSound.RNSoundPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new FBSDKPackage(),
             new MusicControl(),
             new ReactNativeAudioStreamingPackage(),
             new RNSoundPackage(),

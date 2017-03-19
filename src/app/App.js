@@ -18,7 +18,7 @@ class App extends Component {
     const { dispatch, view } = this.props
     AsyncStorage.getItem("user").then((value) => {
       value = JSON.parse(value);
-      if(value != null && value.fbId) {
+      if(value != null && value.fb_id) {
         dispatch(login(value));
       }
     })

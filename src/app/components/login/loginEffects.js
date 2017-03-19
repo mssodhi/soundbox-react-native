@@ -5,26 +5,22 @@ import { AUTH_FACEBOOK, AUTH_DEMO, AUTH_RESOLVE, AUTH_LOGOUT } from './../../../
 import { loadFavorites } from '../favorites/favoitesEffects'
 import { loadGenres, loadCharts } from '../charts/chartsEffects'
 
-let user = {
-  username: 'demo',
-  name: 'John Doe',
-  fbId: '1209',
-}
-
-export const facebookLogin = () => {
+export const facebookLogin = (user) => {
   return dispatch => {
-    dispatch({ type: AUTH_FACEBOOK });
-    AsyncStorage.setItem("user", JSON.stringify(user));
-    dispatch(login(user))
+    return fetch(`http://mssodhi.me/soundbox/api/login/checkUser/${user.id}`, {
+      method: 'PUT',
+      body: JSON.stringify({
+        name: user.name
+      })
+    })
+      .then((response) => response.json())
+      .then(user => dispatch(login(user)))
+      .catch((error) => reject(error));
   }
 }
 
 export const demoLogin = () => {
-  return dispatch => {
-    dispatch({ type: AUTH_DEMO });
-    AsyncStorage.setItem("user", JSON.stringify(user));
-    dispatch(login(user));
-  }
+  return dispatch => dispatch(login({ name: 'John Doe', fb_id: '1209' }))
 }
 
 export const logout = () => {
@@ -38,19 +34,12 @@ export const logout = () => {
 
 export const login = (user) => {
   return dispatch => {
-    dispatch(loadFavorites(user.fbId));
-    let genre = {name: 'All Music', value: 'all-music'}
+    console.log(user);
+    AsyncStorage.setItem("user", JSON.stringify(user));
+    dispatch(loadFavorites(user.fb_id));
+    let genre = { name: 'All Music', value: 'all-music' }
     dispatch(loadCharts(genre));
     dispatch(loadGenres());
     dispatch({ type: AUTH_RESOLVE, payload: user });
-  }
-}
-
-const reject = (error) => {
-  return {
-    type: AUTH_REJECT,
-    payload: {
-      error
-    }
   }
 }
