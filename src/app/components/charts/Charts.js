@@ -12,7 +12,7 @@ import ChartsGenrePicker from './ChartsGenrePicker'
 class Charts extends React.Component {
   constructor() {
     super()
-    this.state = { carousel: true }
+    this.state = { carousel: false }
   }
 
   _renderPickerOptions(genres) {
@@ -26,7 +26,7 @@ class Charts extends React.Component {
     return (
       <View style={styles.charts}>
 
-        <TouchableHighlight onPress={() => this.props.navigator.push({component: ChartsGenrePicker})}>
+        <TouchableHighlight onPress={() => this.props.navigator.push({ component: ChartsGenrePicker })}>
           <View style={styles.row}>
             <Text style={styles.text}>{chartsState.selectedGenre.name}</Text>
             <Icon name='chevron-right' size={20} style={styles.icon} />

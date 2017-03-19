@@ -14,7 +14,7 @@ export const facebookLogin = (user) => {
       })
     })
       .then((response) => response.json())
-      .then(user => dispatch(login(user)))
+      .then((user) => dispatch(login(user)))
       .catch((error) => reject(error));
   }
 }
@@ -26,20 +26,16 @@ export const demoLogin = () => {
 export const logout = () => {
   return dispatch => {
     AsyncStorage.clear();
-    dispatch({
-      type: AUTH_LOGOUT,
-    })
+    dispatch({ type: AUTH_LOGOUT })
   }
 }
 
 export const login = (user) => {
   return dispatch => {
-    console.log(user);
-    AsyncStorage.setItem("user", JSON.stringify(user));
     dispatch(loadFavorites(user.fb_id));
-    let genre = { name: 'All Music', value: 'all-music' }
-    dispatch(loadCharts(genre));
-    dispatch(loadGenres());
     dispatch({ type: AUTH_RESOLVE, payload: user });
+    dispatch(loadCharts({ name: 'All Music', value: 'all-music' }));
+    dispatch(loadGenres());
+    AsyncStorage.setItem("user", JSON.stringify(user));
   }
 }

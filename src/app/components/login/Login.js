@@ -2,32 +2,40 @@ import React, { PropTypes } from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { connect } from 'react-redux'
-import { GraphRequest, GraphRequestManager, LoginManager } from 'react-native-fbsdk'
+import { GraphRequest, GraphRequestManager, LoginManager, AccessToken } from 'react-native-fbsdk'
 import { facebookLogin, demoLogin } from './loginEffects'
 
 class Login extends React.Component {
 
   _handleLoginManager(callback) {
-    LoginManager.logInWithReadPermissions(['public_profile']).then(result => {
-      if (result.isCancelled) {
-        alert('Login cancelled');
-      } else if (result.grantedPermissions.length == 0) {
-        alert("Error loging in");
-      } else {
+    AccessToken.getCurrentAccessToken().then(token => {
+      // check to see if a token is already present
+      if (token.userID) {
         this._fetchFacebookProfile(callback);
+      } else {
+        // if not, have the user login
+        LoginManager.logInWithReadPermissions(['public_profile']).then(result => {
+          if (result.isCancelled) {
+            alert('Login cancelled');
+          } else if (result.grantedPermissions.length == 0) {
+            alert("Error loging in");
+          } else {
+            this._fetchFacebookProfile(callback);
+          }
+        })
       }
     })
   }
 
   _fetchFacebookProfile(callback) {
-    let req = new GraphRequest(
+    const req = new GraphRequest(
       '/me',
       null,
       fcn = (error, response) => {
-        if(error) {
+        if (error) {
           alert("Error loggin in");
         }
-        if(response.id) {
+        if (response.id) {
           callback(response);
         }
       }
