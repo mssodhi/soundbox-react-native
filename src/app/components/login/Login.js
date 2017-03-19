@@ -10,7 +10,7 @@ class Login extends React.Component {
   _handleLoginManager(callback) {
     AccessToken.getCurrentAccessToken().then(token => {
       // check to see if a token is already present
-      if (token.userID) {
+      if (token && token.userID) {
         this._fetchFacebookProfile(callback);
       } else {
         // if not, have the user login
